@@ -1,18 +1,18 @@
-class Table {
+class Maze {
   constructor(row, col) {
     this.ROW = row;
     this.COL = col;
 
     this.matrix = (() => {
-      let table = []
+      let maze = []
       for (let i = 0; i < this.ROW; i++) {
         let row = [];
         for (let j = 0; j < this.COL; j++) {
           row.push(0);
         }
-        table.push(row);
+        maze.push(row);
       }
-      return table;
+      return maze;
     })();
   }
 
@@ -29,9 +29,9 @@ class Table {
   }
 
   render(element) {
-    const table = document.createElement('table');
+    const maze = document.createElement('table');
     for (let i = 0; i < this.ROW; i++) {
-      const tr = table.insertRow();
+      const tr = maze.insertRow();
       for (let j = 0; j < this.COL; j++) {
         const td = tr.insertCell();
         switch (this.matrix[i][j]) {
@@ -50,13 +50,13 @@ class Table {
         td.appendChild(document.createTextNode('\xa0'));
       }
     }
-    element.appendChild(table);
+    element.appendChild(maze);
   }
 }
 
-const table = new Table(10, 10);
-table.assignSource(1, 1);
-table.assignTarget(9, 9);
-console.log(table.isNodeValid(9, 9));
-console.log(table.isNodeValid(11, 11));
-table.render(document.getElementById('root'));
+const maze = new Maze(10, 10);
+maze.assignSource(1, 1);
+maze.assignTarget(9, 9);
+console.log(maze.isNodeValid(9, 9));
+console.log(maze.isNodeValid(11, 11));
+maze.render(document.getElementById('root'));
