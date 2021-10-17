@@ -5,20 +5,6 @@ class aStar{
             Math.abs(targetNode[1] - currentNode[1]);
   }
 
-  static calcG(source, current){
-    return this.manhattamDistance(current, source);
-  }
-
-  static calcF(source, target, current){
-    // F = G + H
-
-    // G = the distance between the current node and the source node
-    const G = this.calcG(source, current);
-    // H (heuristic) = estimated distance from the current node to the target node.
-    const H = this.manhattamDistance(current, target);
-    return G + H;
-  }
-
   static getNeighbors(maze, currentNode){
     /*
       Getting the 8 neighbors of current node
@@ -54,6 +40,86 @@ class aStar{
     neighborhood.pop(); // removes the current and return only the 8 adjacent squares
     return neighborhood;
   }
+
+  static async discover(maze, source, target){
+    // Initialize open and close lists
+    let openList = [];
+    let closedList = [];
+
+    // create nodes for start point and end point
+    const sourceNode = new MazeNode(source);
+    const targetNode = new MazeNode(target);
+
+    // populate openList with start point
+    openList.push(sourceNode);
+
+    // algorithm loop
+    while (openList.length > 0) {
+      // reorder the openList to make the lesser F as last node in list
+      openList.sort((nodeA, nodeB) => {
+        if (nodeA.F < nodeB.F)
+          // se F de A for menor que B, A fica por último
+          return 1;
+        if (nodeA.F > nodeB.F)
+          // se F de A for maior que B, B fica por último
+          return -1;
+        // se forem iguais, não altera ordem
+        return 0;
+      })
+
+      // get the node with lesser F in openList
+      let currentNode = openList[openList.length - 1];
+
+      // add current node to closed list and remove from open list
+      closedList.push(openList.pop());
+
+      await sleep(100); // wait 100ms to display node in screen
+      closedList.forEach(node => {
+        const [i, j] = node.index;
+        if (!isArrayEquals([i, j], sourceNode.index)
+          && !isArrayEquals([i, j], targetNode.index))
+          maze.matrix[i][j] = '1'; // colors node in maze
+      })
+      maze.render(document.getElementById('root'));
+
+      // have found the goal
+      if (isArrayEquals(currentNode.index, targetNode.index)) {
+        let path = [];
+        let current = currentNode;
+        while (current) {
+          path.push(current.index); // save the path indexes in path array
+          current = current.parent; // iterate over nodes by parent pointer
+        }
+        return path;
+      }
+
+      aStar
+        .getNeighbors(maze, currentNode.index) // returns a list with indexes of adjacent nodes
+        .forEach((neighborNodeIndex) => {
+          // if not in closed list
+          if (!closedList.indexOf(neighborNodeIndex) >= 0) {
+            // create a new node for each neighbor
+            let neighborNode = new MazeNode(neighborNodeIndex, currentNode);
+
+            // add G and F attributes to node
+            neighborNode.G = currentNode.G + 1;
+            neighborNode.F = neighborNode.G + aStar.manhattamDistance(neighborNode.index, targetNode.index);
+
+            // check if node already is in open list
+            const nodeAlreadyInList = openList.indexOf(neighborNodeIndex);
+            if (nodeAlreadyInList >= 0) {
+              // check if the G cost is lesser going by this path
+              if (openList[nodeAlreadyInList].G > neighborNode.G)
+                // if so, update the node with the new G and F values
+                openList[nodeAlreadyInList] = neighborNode;
+            } else {
+              // add it to open list
+              openList.push(neighborNode);
+            }
+          }
+        })
+    }
+  }
 }
 
 class MazeNode{
@@ -66,5 +132,3 @@ class MazeNode{
     this.F = 0;
   }
 }
-
-console.log(aStar.calcF([1,1], [9,9], [2,2]));

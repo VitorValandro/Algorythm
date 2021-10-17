@@ -17,11 +17,11 @@ class Maze {
     })();
   }
 
-  assignSource(x, y) {
-    this.matrix[x][y] = 'S';
+  assignSource(node) {
+    this.matrix[node[0]][node[1]] = 'S';
   }
-  assignTarget(x, y) {
-    this.matrix[x][y] = 'T';
+  assignTarget(node) {
+    this.matrix[node[0]][node[1]] = 'T';
   }
 
   isNodeValid(x, y) {
@@ -57,10 +57,3 @@ class Maze {
     element.appendChild(this.maze);
   }
 }
-
-const maze = new Maze(10, 10);
-maze.assignSource(1, 1);
-maze.assignTarget(9, 9);
-console.log(maze.isNodeValid(9, 9));
-console.log(maze.isNodeValid(11, 11));
-maze.render(document.getElementById('root'));
