@@ -2,6 +2,7 @@ class Maze {
   constructor(row, col) {
     this.ROW = row;
     this.COL = col;
+    this.maze = document.createElement('table');
 
     this.matrix = (() => {
       let maze = []
@@ -24,14 +25,17 @@ class Maze {
   }
 
   isNodeValid(x, y) {
-    return (x >= 0 && x <= this.ROW)
-      && (y >= 0 && y <= this.COL)
+    return (x >= 0 && x < this.ROW)
+      && (y >= 0 && y < this.COL)
   }
 
   render(element) {
-    const maze = document.createElement('table');
+    if(this.maze){
+      this.maze.remove();
+      this.maze = document.createElement('table');
+    }
     for (let i = 0; i < this.ROW; i++) {
-      const tr = maze.insertRow();
+      const tr = this.maze.insertRow();
       for (let j = 0; j < this.COL; j++) {
         const td = tr.insertCell();
         switch (this.matrix[i][j]) {
@@ -50,7 +54,7 @@ class Maze {
         td.appendChild(document.createTextNode('\xa0'));
       }
     }
-    element.appendChild(maze);
+    element.appendChild(this.maze);
   }
 }
 
