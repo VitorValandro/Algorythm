@@ -1,5 +1,5 @@
 const SOURCE = [1, 1];
-const TARGET = [4, 9];
+const TARGET = [9, 9];
 const maze = new Maze(10, 10);
 
 maze.assignSource(SOURCE);

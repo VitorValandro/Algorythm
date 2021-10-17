@@ -50,6 +50,10 @@ class Maze {
             break;
           case 'T':
             td.classList.add('targetNode');
+            break;
+          case 'P':
+            td.classList.add('pathNode');
+            break;
         }
         td.appendChild(document.createTextNode('\xa0'));
       }

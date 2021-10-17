@@ -8,7 +8,7 @@
   --source: #27BB65;
   --target: #FD413C;
   --wall: #1F1F1F;
-  --path: #E1E1E1;
+  --path: #313C45;
 }
 
 * {
@@ -61,4 +61,8 @@ td {
 
 .targetNode{
   background-color: var(--target);
+}
+
+.pathNode{
+  background-color: var(--path);
 }

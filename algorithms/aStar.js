@@ -31,11 +31,23 @@ class aStar{
     const INDEX = [-1, 1, 0];
     let neighborhood = [];
 
+    // it disconsider corners (just N, S, W and E)
     INDEX.forEach(i => {
-      INDEX.forEach(j => {
-        if(maze.isNodeValid(currentNode[0] + i, currentNode[1] + j))
-          neighborhood.push([currentNode[0] + i, currentNode[1] + j]);
+      if (maze.isNodeValid(currentNode[0] + i, currentNode[1]))
+        neighborhood.push([currentNode[0] + i, currentNode[1]]);
+
+      if (maze.isNodeValid(currentNode[0], currentNode[1] + i))
+        neighborhood.push([currentNode[0], currentNode[1] + i]);
+      
+      /*
+      it consider the 9 cells, including corners with N.W, N.E, S.W e S.E
+      INDEX.forEach(i => {
+        INDEX.forEach(j => {
+          if(maze.isNodeValid(currentNode[0] + i, currentNode[1] + j))
+            neighborhood.push([currentNode[0] + i, currentNode[1] + j]);
+        })
       })
+      */
     })
     neighborhood.pop(); // removes the current and return only the 8 adjacent squares
     return neighborhood;
@@ -78,7 +90,7 @@ class aStar{
         const [i, j] = node.index;
         if (!isArrayEquals([i, j], sourceNode.index)
           && !isArrayEquals([i, j], targetNode.index))
-          maze.matrix[i][j] = '1'; // colors node in maze
+          maze.matrix[i][j] = 'P'; // colors node in maze
       })
       maze.render(document.getElementById('root'));
 
