@@ -48,11 +48,12 @@ td {
 }
 
 .nullNode{
-  background-color: var(--darker);
+  background-color: var(--wall);
+  
 }
 
 .fillNode{
-  background-color: var(--wall);
+  background-color: var(--darker);
 }
 
 .sourceNode{
