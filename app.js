@@ -1,6 +1,6 @@
 const SOURCE = [1, 1];
-const TARGET = [9, 9];
-const maze = new Maze(10, 10);
+const TARGET = [18, 18];
+const maze = new Maze(20, 20);
 maze.generateMaze(SOURCE);
 
 maze.assignSource(SOURCE);

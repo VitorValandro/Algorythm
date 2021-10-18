@@ -40,6 +40,12 @@ class Maze {
   }
 
   generateMaze(sourceNode){
+    /*
+      This is an algorithm to generate randomized mazes
+      it receives as input the sourceNode from the maze will start
+      and converts the this.matrix with the new maze
+    */ 
+   
     let directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]; // S, N, E, W
     const [i, j] = sourceNode;
 

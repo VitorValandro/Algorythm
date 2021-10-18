@@ -27,6 +27,9 @@ class aStar{
       S.W     -->    Down right node      [i+1][j-1]
 
       neighborhood = [N.W, N.E, N, S.W, S.E, S, W, E, current]
+
+      in this algorithm we disconsider the corners, so if you want consider it 
+      you'll have to include in neighborhood the N.E, N.W, S.E, SW cells as well
     */
     const INDEX = [-1, 1, 0];
     let neighborhood = [];
@@ -40,16 +43,6 @@ class aStar{
       if (maze.isNodeValid(currentNode[0], currentNode[1] + i)
         && maze.isNodePassable([currentNode[0], currentNode[1] + i]))
         neighborhood.push([currentNode[0], currentNode[1] + i]);
-      
-      /*
-      it consider the 9 cells, including corners with N.W, N.E, S.W e S.E
-      INDEX.forEach(i => {
-        INDEX.forEach(j => {
-          if(maze.isNodeValid(currentNode[0] + i, currentNode[1] + j))
-            neighborhood.push([currentNode[0] + i, currentNode[1] + j]);
-        })
-      })
-      */
     })
 
     // removes the current and return only the 8 adjacent squares
