@@ -26,17 +26,19 @@ class aStar{
       S.E     -->    Down left node       [i+1][j+1]
       S.W     -->    Down right node      [i+1][j-1]
 
-      neighborhood = [N.W, N.E, N, S.W, S.E, S, W, E, current] --> in this order
+      neighborhood = [N.W, N.E, N, S.W, S.E, S, W, E, current]
     */
     const INDEX = [-1, 1, 0];
     let neighborhood = [];
 
     // it disconsider corners (just N, S, W and E)
     INDEX.forEach(i => {
-      if (maze.isNodeValid(currentNode[0] + i, currentNode[1]))
+      if (maze.isNodeValid(currentNode[0] + i, currentNode[1]) 
+        && maze.isNodePassable([currentNode[0] + i, currentNode[1]]))
         neighborhood.push([currentNode[0] + i, currentNode[1]]);
 
-      if (maze.isNodeValid(currentNode[0], currentNode[1] + i))
+      if (maze.isNodeValid(currentNode[0], currentNode[1] + i)
+        && maze.isNodePassable([currentNode[0], currentNode[1] + i]))
         neighborhood.push([currentNode[0], currentNode[1] + i]);
       
       /*
@@ -49,7 +51,9 @@ class aStar{
       })
       */
     })
-    neighborhood.pop(); // removes the current and return only the 8 adjacent squares
+
+    // removes the current and return only the 8 adjacent squares
+    neighborhood = neighborhood.filter(node => !isArrayEquals(node, currentNode))
     return neighborhood;
   }
 
@@ -93,7 +97,6 @@ class aStar{
           maze.matrix[i][j] = 'P'; // colors node in maze
       })
       maze.render(document.getElementById('root'));
-
       // have found the goal
       if (isArrayEquals(currentNode.index, targetNode.index)) {
         let path = [];

@@ -29,6 +29,16 @@ class Maze {
       && (y >= 0 && y < this.COL)
   }
 
+  isNodeAWall(node){
+    const [i, j] = node;
+    return this.matrix[i][j] == 1;
+  }
+
+  isNodePassable(node){
+    const [i, j] = node;
+    return this.matrix[i][j] == 0 || this.matrix[i][j] == 'T';
+  }
+
   generateMaze(sourceNode){
     let directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]; // S, N, E, W
     const [i, j] = sourceNode;
@@ -51,7 +61,7 @@ class Maze {
 
       // check if the forwardNode is a wall
       if(this.isNodeValid(forwardNode[0], forwardNode[1]) 
-        && this.matrix[forwardNode[0]][forwardNode[1]] == 1){
+        && this.isNodeAWall(forwardNode)){
           // have found a path
 
           // set the node between currentNode and forwardNode as a path
