@@ -29,23 +29,30 @@ class Maze {
       && (y >= 0 && y < this.COL)
   }
 
-  isNodeAWall(node){
+  isNodeAWall(node) {
     const [i, j] = node;
     return this.matrix[i][j] == 1;
   }
 
-  isNodePassable(node){
+  isNodePassable(node) {
     const [i, j] = node;
     return this.matrix[i][j] == 0 || this.matrix[i][j] == 'T';
   }
 
-  generateMaze(sourceNode){
+  calculateCellSize() {
+    const TABLE_SIZE = 100;
+    let width = 100 / this.COL;
+    let heigth = 100 / this.ROW;
+    return [width, heigth];
+  }
+
+  generateMaze(sourceNode) {
     /*
       This is an algorithm to generate randomized mazes
       it receives as input the sourceNode from the maze will start
       and converts the this.matrix with the new maze
-    */ 
-   
+    */
+
     let directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]; // S, N, E, W
     const [i, j] = sourceNode;
 
@@ -53,7 +60,7 @@ class Maze {
     // shuffle directions list to get a random one
     directions = shuffle(directions);
 
-    while(directions.length > 0){
+    while (directions.length > 0) {
       // get the last item of the shuffled list and remove it
       let currentDirection = directions.pop();
 
@@ -61,32 +68,32 @@ class Maze {
       // multiply by 2 because we want jump 1 node and get the next one
       // like [x, N, y] where x is current and y is the forward node
       let forwardNode = [
-        i + (currentDirection[0] * 2), 
+        i + (currentDirection[0] * 2),
         j + (currentDirection[1] * 2)
       ];
 
       // check if the forwardNode is a wall
-      if(this.isNodeValid(forwardNode[0], forwardNode[1]) 
-        && this.isNodeAWall(forwardNode)){
-          // have found a path
+      if (this.isNodeValid(forwardNode[0], forwardNode[1])
+        && this.isNodeAWall(forwardNode)) {
+        // have found a path
 
-          // set the node between currentNode and forwardNode as a path
-          // [x, N, y] -> N is now a path
-          let linkingNode = [
-            i + (currentDirection[0]),
-            j + (currentDirection[1])
-          ]
-          this.matrix[linkingNode[0]][linkingNode[1]] = 0;
+        // set the node between currentNode and forwardNode as a path
+        // [x, N, y] -> N is now a path
+        let linkingNode = [
+          i + (currentDirection[0]),
+          j + (currentDirection[1])
+        ]
+        this.matrix[linkingNode[0]][linkingNode[1]] = 0;
 
-          // move to the forwardNode and repeat recusively
-          this.generateMaze(forwardNode);
-        }
+        // move to the forwardNode and repeat recusively
+        this.generateMaze(forwardNode);
+      }
     }
     return;
   }
 
   render(element) {
-    if(this.maze){
+    if (this.maze) {
       this.maze.remove();
       this.maze = document.createElement('table');
     }

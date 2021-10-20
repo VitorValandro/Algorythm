@@ -1,11 +1,17 @@
-class aStar{
-  static manhattamDistance(currentNode, targetNode){
+class aStar {
+  static manhattamDistance(currentNode, targetNode) {
     // method to determine the Manhattam Distance used as Heuristic (H) to a* algorithm
-    return Math.abs(targetNode[0] - currentNode[0]) + 
-            Math.abs(targetNode[1] - currentNode[1]);
+    return Math.abs(targetNode[0] - currentNode[0]) +
+      Math.abs(targetNode[1] - currentNode[1]);
   }
 
-  static getNeighbors(maze, currentNode){
+  static euclideanDistance(currentNode, targetNode) {
+    // method to determine the Euclidean Distance used as Heuristic (H) to a* algorithm
+    // we don't calculate the square of it to save processing time
+    return ((currentNode[0] - targetNode[0]) ** 2) + ((currentNode[1] - targetNode[1]) ** 2);
+  }
+
+  static getNeighbors(maze, currentNode) {
     /*
       Getting the 8 neighbors of current node
       N.W  N   N.E
@@ -36,7 +42,7 @@ class aStar{
 
     // it disconsider corners (just N, S, W and E)
     INDEX.forEach(i => {
-      if (maze.isNodeValid(currentNode[0] + i, currentNode[1]) 
+      if (maze.isNodeValid(currentNode[0] + i, currentNode[1])
         && maze.isNodePassable([currentNode[0] + i, currentNode[1]]))
         neighborhood.push([currentNode[0] + i, currentNode[1]]);
 
@@ -50,7 +56,11 @@ class aStar{
     return neighborhood;
   }
 
-  static async discover(maze, source, target){
+  static async discover(maze, source, target, heuristic = "manhattam") {
+    const heuristicAlgorithms = {
+      "manhattam": aStar.manhattamDistance,
+      "euclidean": aStar.euclideanDistance
+    }
     // Initialize open and close lists
     let openList = [];
     let closedList = [];
@@ -111,7 +121,8 @@ class aStar{
 
             // add G and F attributes to node
             neighborNode.G = currentNode.G + 1;
-            neighborNode.F = neighborNode.G + aStar.manhattamDistance(neighborNode.index, targetNode.index);
+            neighborNode.H = heuristicAlgorithms[heuristic](neighborNode.index, targetNode.index);
+            neighborNode.F = neighborNode.G + neighborNode.H;
 
             // check if node already is in open list
             const nodeAlreadyInList = openList.indexOf(neighborNodeIndex);
@@ -130,13 +141,14 @@ class aStar{
   }
 }
 
-class MazeNode{
-  constructor(index, parent=undefined){
+class MazeNode {
+  constructor(index, parent = undefined) {
     this.index = index;
     this.parent = parent;
 
     // H is calculated in calcF
     this.G = 0;
+    this.H = 0;
     this.F = 0;
   }
 }
