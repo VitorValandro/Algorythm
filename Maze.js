@@ -2,7 +2,14 @@ class Maze {
   constructor(row, col) {
     this.ROW = row;
     this.COL = col;
-    this.maze = document.createElement('table');
+    this.canvas = document.createElement('canvas');
+    this.cellColors = {
+      0: "#1F1F1F", // path cells
+      1: "#000000", // wall cells
+      'S': "#27BB65", // source cell
+      'T': "#FD413C", // target cell
+      'P': "#313C45" // path cell
+    }
 
     this.matrix = (() => {
       let maze = []
@@ -37,13 +44,6 @@ class Maze {
   isNodePassable(node) {
     const [i, j] = node;
     return this.matrix[i][j] == 0 || this.matrix[i][j] == 'T';
-  }
-
-  calculateCellSize() {
-    const TABLE_SIZE = 100;
-    let width = 100 / this.COL;
-    let heigth = 100 / this.ROW;
-    return [width, heigth];
   }
 
   generateMaze(sourceNode) {
@@ -92,35 +92,40 @@ class Maze {
     return;
   }
 
-  render(element) {
-    if (this.maze) {
-      this.maze.remove();
-      this.maze = document.createElement('table');
+  render(element, mazeSize, cellSize) {
+    if (this.canvas) {
+      this.canvas.remove();
+      this.canvas = document.createElement('canvas');
+      this.canvas.width = mazeSize;
+      this.canvas.height = mazeSize;
     }
-    for (let i = 0; i < this.ROW; i++) {
-      const tr = this.maze.insertRow();
-      for (let j = 0; j < this.COL; j++) {
-        const td = tr.insertCell();
-        switch (this.matrix[i][j]) {
-          case 0:
-            td.classList.add('nullNode');
-            break;
-          case 1:
-            td.classList.add('fillNode');
-            break;
-          case 'S':
-            td.classList.add('sourceNode');
-            break;
-          case 'T':
-            td.classList.add('targetNode');
-            break;
-          case 'P':
-            td.classList.add('pathNode');
-            break;
-        }
-        td.appendChild(document.createTextNode('\xa0'));
+    const ctx = this.canvas.getContext('2d');
+
+    const cells = new Array(this.COL * this.ROW);
+    // fill the cells array with values
+
+    for (let y = 0; y <= this.ROW; y++) {
+      for (let x = 0; x < this.COL; x++) {
+        let index = x + y * this.COL;
+        let cell = {}
+        cell.x = x * cellSize;
+        cell.y = y * cellSize;
+        cell.type = this.matrix[x][y];
+
+        cells[index] = cell;
       }
     }
-    element.appendChild(this.maze);
+    //draw every cell in the grid of cells
+    cells.forEach((cell, i) => {
+      ctx.beginPath();
+
+      ctx.fillStyle = this.cellColors[cell.type];
+      ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
+
+      ctx.strokeStyle = "#7B7B7B";
+      ctx.strokeRect(cell.x, cell.y, cellSize, cellSize);
+    })
+
+    element.appendChild(this.canvas);
   }
 }
