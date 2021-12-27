@@ -3,11 +3,11 @@ class Prims {
     const INDEX = [-2, 2, 0];
     let frontierList = [];
     INDEX.forEach(i => {
-      if (maze.isNodeValid(startNode[0] + i, startNode[1])
+      if (maze.isNodeValid([startNode[0] + i, startNode[1]])
         && maze.isNodeAWall([startNode[0] + i, startNode[1]]))
         frontierList.push([startNode[0] + i, startNode[1]]);
 
-      if (maze.isNodeValid(startNode[0], startNode[1] + i)
+      if (maze.isNodeValid([startNode[0], startNode[1] + i])
         && maze.isNodeAWall([startNode[0], startNode[1] + i]))
         frontierList.push([startNode[0], startNode[1] + i]);
     })
@@ -22,11 +22,11 @@ class Prims {
     const INDEX = [-2, 2, 0];
     let neighborList = [];
     INDEX.forEach(i => {
-      if (maze.isNodeValid(startNode[0] + i, startNode[1])
+      if (maze.isNodeValid([startNode[0] + i, startNode[1]])
         && maze.isNodePassable([startNode[0] + i, startNode[1]]))
         neighborList.push([startNode[0] + i, startNode[1]]);
 
-      if (maze.isNodeValid(startNode[0], startNode[1] + i)
+      if (maze.isNodeValid([startNode[0], startNode[1] + i])
         && maze.isNodePassable([startNode[0], startNode[1] + i]))
         neighborList.push([startNode[0], startNode[1] + i]);
     })
@@ -47,7 +47,6 @@ class Prims {
 
     let frontierNodesList = this.getFrontier(maze, sourceNode); // list of frontier nodes from sourceNode
     while (frontierNodesList.length > 0) {
-      console.log('Início: ', frontierNodesList)
       let frontierNode = randomChoice(frontierNodesList);
       let frontierNeighborsList = this.getNeighbors(maze, frontierNode);
 
@@ -58,10 +57,8 @@ class Prims {
         maze.matrix[frontierNode[0]][frontierNode[1]] = 0;
         maze.matrix[inBetweenX][inBetweenY] = 0;
       }
-      console.log('novo: ', this.getFrontier(maze, frontierNode))
       frontierNodesList = frontierNodesList.concat(this.getFrontier(maze, frontierNode));
       removeItem(frontierNodesList, frontierNode);
-      console.log('Fim: ', frontierNodesList)
     }
   }
 }

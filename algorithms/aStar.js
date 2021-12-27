@@ -42,11 +42,11 @@ class aStar {
 
     // it disconsider corners (just N, S, W and E)
     INDEX.forEach(i => {
-      if (maze.isNodeValid(currentNode[0] + i, currentNode[1])
+      if (maze.isNodeValid([currentNode[0] + i, currentNode[1]])
         && maze.isNodePassable([currentNode[0] + i, currentNode[1]]))
         neighborhood.push([currentNode[0] + i, currentNode[1]]);
 
-      if (maze.isNodeValid(currentNode[0], currentNode[1] + i)
+      if (maze.isNodeValid([currentNode[0], currentNode[1] + i])
         && maze.isNodePassable([currentNode[0], currentNode[1] + i]))
         neighborhood.push([currentNode[0], currentNode[1] + i]);
     })
