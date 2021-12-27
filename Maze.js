@@ -1,14 +1,16 @@
 class Maze {
-  constructor(row, col) {
+  constructor(row, col, source, target) {
     this.ROW = row;
     this.COL = col;
+    this.source = source;
+    this.target = target;
     this.canvas = document.createElement('canvas');
     this.cellColors = {
-      0: "#1F1F1F", // path cells
+      0: "#1F1F1F", // possible path cells
       1: "#000000", // wall cells
       'S': "#27BB65", // source cell
       'T': "#FD413C", // target cell
-      'P': "#313C45" // path cell
+      'P': "#313C45" // traveled path cell
     }
 
     this.matrix = (() => {
@@ -24,11 +26,11 @@ class Maze {
     })();
   }
 
-  assignSource(node) {
-    this.matrix[node[0]][node[1]] = 'S';
+  assignSource() {
+    this.matrix[this.source[0]][this.source[1]] = 'S';
   }
-  assignTarget(node) {
-    this.matrix[node[0]][node[1]] = 'T';
+  assignTarget() {
+    this.matrix[this.target[0]][this.target[1]] = 'T';
   }
 
   isNodeValid(x, y) {
@@ -46,7 +48,7 @@ class Maze {
     return this.matrix[i][j] == 0 || this.matrix[i][j] == 'T';
   }
 
-  generateMaze(sourceNode) {
+  recursiveBacktrack(sourceNode) {
     /*
       This is an algorithm to generate randomized mazes
       it receives as input the sourceNode from the maze will start
@@ -85,14 +87,17 @@ class Maze {
         ]
         this.matrix[linkingNode[0]][linkingNode[1]] = 0;
 
-        // move to the forwardNode and repeat recusively
-        this.generateMaze(forwardNode);
+        // move to the forwardNode and repeat recursively
+        this.recursiveBacktrack(forwardNode);
       }
     }
     return;
   }
 
   render(element, mazeSize, cellSize) {
+    maze.assignSource();
+    maze.assignTarget();
+
     if (this.canvas) {
       this.canvas.remove();
       this.canvas = document.createElement('canvas');
