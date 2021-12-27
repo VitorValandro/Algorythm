@@ -32,6 +32,18 @@ function shuffle(array) {
   return array;
 }
 
+function randomChoice(array) {
+  // allows to get one random element in a list
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function removeItem(array, item) {
+  let index = array.indexOf(item);
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
+  return array;
+}
 
 function sleep(ms) {
   return new Promise(
