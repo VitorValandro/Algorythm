@@ -13,6 +13,9 @@ class aStar {
 
   static getNeighbors(maze, currentNode) {
     /*
+      This method uses the getNodesAround method from Maze.js to get
+      a list with the coordinates of all neighbors (passable, not walls) of the currentNode.
+
       Getting the 8 neighbors of current node
       N.W  N   N.E
        \   |   /
@@ -36,24 +39,10 @@ class aStar {
 
       in this algorithm we disconsider the corners, so if you want consider it 
       you'll have to include in neighborhood the N.E, N.W, S.E, SW cells as well
+
     */
     const INDEX = [-1, 1, 0];
-    let neighborhood = [];
-
-    // it disconsider corners (just N, S, W and E)
-    INDEX.forEach(i => {
-      if (maze.isNodeValid([currentNode[0] + i, currentNode[1]])
-        && maze.isNodePassable([currentNode[0] + i, currentNode[1]]))
-        neighborhood.push([currentNode[0] + i, currentNode[1]]);
-
-      if (maze.isNodeValid([currentNode[0], currentNode[1] + i])
-        && maze.isNodePassable([currentNode[0], currentNode[1] + i]))
-        neighborhood.push([currentNode[0], currentNode[1] + i]);
-    })
-
-    // removes the current and return only the 8 adjacent squares
-    neighborhood = neighborhood.filter(node => !isArrayEquals(node, currentNode))
-    return neighborhood;
+    return maze.getNodesAround(currentNode, INDEX, maze.isNodePassable.bind(maze));
   }
 
   static async discover(maze, source, target, heuristic = "manhattam") {

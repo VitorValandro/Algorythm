@@ -49,9 +49,26 @@ class Maze {
     return this.matrix[i][j] == 0 || this.matrix[i][j] == 'T';
   }
 
+  getNodesAround(node, INDEX, nodeStateValidator) {
+    let nodesAround = [];
+
+    INDEX.forEach(i => {
+      if (this.isNodeValid([node[0] + i, node[1]])
+        && nodeStateValidator([node[0] + i, node[1]]))
+        nodesAround.push([node[0] + i, node[1]]);
+
+      if (this.isNodeValid([node[0], node[1] + i])
+        && nodeStateValidator([node[0], node[1] + i]))
+        nodesAround.push([node[0], node[1] + i]);
+    })
+
+    nodesAround = nodesAround.filter(currentNode => !isArrayEquals(currentNode, node))
+    return nodesAround;
+  }
+
   render(element, mazeSize, cellSize) {
-    maze.assignSource();
-    maze.assignTarget();
+    this.assignSource();
+    this.assignTarget();
 
     if (this.canvas) {
       this.canvas.remove();
