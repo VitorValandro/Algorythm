@@ -24,6 +24,12 @@ body {
   color: var(--white);
 }
 
+.flexbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .menu{
   display: flex;
   justify-content: space-between;
@@ -63,6 +69,21 @@ body {
 .content .textbox p {
   font-size: 1.1em;
   text-align: justify;
+}
+
+.content .textbox li {
+  margin: 10px 50px;
+}
+
+.content #backtrack_steps{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.content #backtrack_steps img{
+  width: 222px;
 }
 
 .static_mazes {

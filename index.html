@@ -32,7 +32,7 @@
           like graphs, trees and, in the case of Algorythm, bidimensional arrays - or matrixes.
         </p>
         <div class="static_mazes">
-          <!-- HERE IS THE THREE SAMPLE MAZES -->
+          <!-- HERE IS THE THREE SAMPLE MAZES `drawings/sampleMazes.js`-->
         </div>
         <p>
           Here, I will show in detail some of this algorithms to generate random mazes and
@@ -68,6 +68,49 @@
           Backtracking is very useful for solving trivial problems like Sudoku, crosswords and queens.
           However, here we will use Recursive Backtrack for a more restricted problem: generate randomic mazes.
         </p>
+        <br />
+        <p>
+          By choosing random directions and building "bridges" between nodes, the Backtracking is one of the most
+          simpler methods to generate mazes. It works in this steps:
+        </p>
+        <br />
+        <ol>
+          <li>Start a bidimensional array where all nodes are walls;</li>
+          <li>Choose a root node as start point and make it a path;</li>
+          <li>
+            Randomly choose a direction to pick a neighbor node. Check if it hasn't already been visited
+            (check if the node is a wall);
+          </li>
+          <li>
+            Move two units (nodes) in that direction, setting both the forward node and the link node to paths;
+          </li>
+          <li>Call the function recursively with the new forward node's (x,y) coordinates;</li>
+          <li>
+            Repeat until reach a dead end;
+            <ul>
+              <li>If during step three you found that all of your directions contained paths, you need to backtrack;
+              </li>
+              <li>
+                To backtrack, we are going to exit the current function call. This means we are moving backwards
+                into the previous function which had initially moved us into this current node until we find a path.
+                Once we find a new path, we go to step three.
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p>
+          Let's draw step by step to help understand this algorithm:
+        </p>
+        <br />
+        <div class="flexbox">
+          <div id="backtrack_steps">
+            <!-- HERE IS THE BACKTRACKING STEPS -->
+          </div>
+        </div>
+        <br />
+        <div class="textbox">
+          <p>Well, now you can play and test the algorithm generating random mazes:</p>
+        </div>
       </div>
       <div id="canvas"></div>
     </div>
@@ -80,6 +123,8 @@
   <script src="algorithms/Prims.js"></script>
   <script src="algorithms/RecursiveBacktrack.js"></script>
 
+  <script src="drawings/sampleMazes.js"></script>
+  <script src="drawings/backtrackingSteps.js"></script>
   <script src="app.js"></script>
 </body>
 
