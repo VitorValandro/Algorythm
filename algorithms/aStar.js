@@ -88,7 +88,7 @@ class aStar {
           && !isArrayEquals([i, j], targetNode.index))
           maze.matrix[i][j] = 'P'; // colors node in maze
       })
-      maze.render(document.getElementById('root'), MAZE_SIZE, CELL_SIZE);
+      maze.render(document.getElementById('canvas'), MAZE_SIZE, CELL_SIZE);
       // have found the goal
       if (isArrayEquals(currentNode.index, targetNode.index)) {
         let path = [];

@@ -10,9 +10,70 @@
 </head>
 
 <body>
-  <div id="root">
-
+  <nav class="menu">
+    <div class="links">
+      <ul>
+        <li>Mazes</li>
+      </ul>
+    </div>
+    <div class="logo">
+      <span>Algorythm</span>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="content">
+      <h1>Mazes</h1>
+      <hr />
+      <div class="textbox">
+        <p>
+          A maze is a path, or collection of paths, that tipically lead from an entrance to a goal.
+          Mazes have been a widely studied topic in Computer Science, with many algorithms
+          dedicated to building and solving them. Various data structures can represent mazes and labyrinths,
+          like graphs, trees and, in the case of Algorythm, bidimensional arrays - or matrixes.
+        </p>
+        <div class="static_mazes">
+          <!-- HERE IS THE THREE SAMPLE MAZES -->
+        </div>
+        <p>
+          Here, I will show in detail some of this algorithms to generate random mazes and
+          find a path to solve them.
+        </p>
+      </div>
+      <br />
+      <h2>Recursive Backtrack</h2>
+      <div class="textbox">
+        <p>
+          Backtracking is a sort of refined brute force used to be a selective graph traversal method.
+          Imagine a graph/tree representing a initial position (the root node) and a final goal
+          (one of the leaves), and we want to find this leave. So, we could brute-force the
+          nodes and paths until reach the goal, but depending on the graph weight a raw brute-force approach
+          would explode into an impossible number of choices to consider and inviabilize our task. It is the kind
+          of situation where the recursive backtracking becomes useful.
+        </p>
+        <br />
+        <p>
+          Using backtracking, at each node we can eliminate bad choices that are obviously the wrong answer
+          and proceed to recursively check only those that have potential. This way, at each depth of
+          the tree, we mitigate the number of choices to consider in the future.
+        </p>
+        <br />
+        <p>
+          Suppose you get to a bad leaf. You can backtrack to continue the search for a good leaf
+          by revoking your most recent choice, and trying out the next option in that set of options.
+          If you run out of options, revoke the choice that got you here, and try another choice at
+          that node. If you end up at the root with no options left, there are no good leaves to be found.
+        </p>
+        <br />
+        <p>
+          Backtracking is very useful for solving trivial problems like Sudoku, crosswords and queens.
+          However, here we will use Recursive Backtrack for a more restricted problem: generate randomic mazes.
+        </p>
+      </div>
+      <div id="canvas"></div>
+    </div>
   </div>
+  <footer></footer>
+
   <script src="utils.js"></script>
   <script src="Maze.js"></script>
   <script src="algorithms/aStar.js"></script>

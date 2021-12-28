@@ -66,7 +66,7 @@ class Maze {
     return nodesAround;
   }
 
-  render(element, mazeSize, cellSize) {
+  render(element, mazeSize, cellSize, stroke = true) {
     this.assignSource();
     this.assignTarget();
 
@@ -99,7 +99,9 @@ class Maze {
       ctx.fillStyle = this.cellColors[cell.type];
       ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
 
-      ctx.strokeStyle = "#7B7B7B";
+      if (stroke)
+        ctx.strokeStyle = "#7B7B7B";
+
       ctx.strokeRect(cell.x, cell.y, cellSize, cellSize);
     })
 
