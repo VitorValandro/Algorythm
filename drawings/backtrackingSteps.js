@@ -6,7 +6,7 @@ function loadImages(element, path, images) {
   })
 }
 
-function generateMaze(CELL_SIZE, show_grid) {
+function generateMaze(CELL_SIZE, show_grid, index, algorithm = "backtrack") {
   const MAZE_SIZE = 500;
   let source_coord = [];
   let target_coord = [];
@@ -17,19 +17,26 @@ function generateMaze(CELL_SIZE, show_grid) {
   }
   const maze = new Maze(cellsPerRowAndCol, cellsPerRowAndCol, source_coord, target_coord);
 
-  RecursiveBacktrack.mazeGenerator(maze, source_coord);
-  maze.render(
-    document.getElementsByClassName('test_canvas')[0],
-    MAZE_SIZE, CELL_SIZE,
-    stroke = show_grid,
-    'custom_backtrack_maze'
-  );
+  if (algorithm == 'backtrack') {
+    RecursiveBacktrack.mazeGenerator(maze, source_coord);
+    maze.render(
+      document.getElementsByClassName('test_canvas')[index],
+      MAZE_SIZE,
+      CELL_SIZE,
+      stroke = show_grid,
+      'custom_maze'
+    );
+  }
+  else if (algorithm == 'prims') {
+    Prims.mazeGenerator(maze, source_coord, CELL_SIZE, show_grid, index);
+  }
 }
 
-function submitMaze(event) {
+function submitMaze(event, index, algorithm) {
   event.preventDefault();
-  document.querySelector('#custom_backtrack_maze').remove();
-  show_grid = document.querySelector('#show_grid').checked;
-  maze_size = document.querySelector('#size_select').value;
-  generateMaze(maze_size, show_grid);
+  console.log(document.getElementsByClassName('custom_maze'))
+  document.getElementsByClassName('custom_maze')[index].remove();
+  show_grid = document.getElementsByClassName('show_grid')[index].checked;
+  maze_size = document.getElementsByClassName('size_select')[index].value;
+  generateMaze(maze_size, show_grid, index, algorithm);
 }

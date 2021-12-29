@@ -39,7 +39,7 @@
 
 class Prims {
   // start with a Grid full of nodes in state Wall
-  static mazeGenerator(maze, sourceNode) {
+  static async mazeGenerator(maze, sourceNode, maze_size, show_grid, index) {
     maze.matrix = Array(maze.ROW)
       .fill(null)
       .map(() => Array(maze.COL).fill(1));
@@ -67,6 +67,7 @@ class Prims {
         let inBetweenY = (frontierNode[1] + neighborNode[1]) / 2;
         maze.matrix[frontierNode[0]][frontierNode[1]] = 0;
         maze.matrix[inBetweenX][inBetweenY] = 0;
+        //maze.matrix[neighborNode[0]][neighborNode[1]] = 0;
       }
       // compute the frontier cells of the chosen frontier cell and add them to the frontier list. 
       frontierNodesList = frontierNodesList.concat(
@@ -74,6 +75,8 @@ class Prims {
       );
       // remove the chosen frontier cell from the list of frontier cells
       removeItem(frontierNodesList, frontierNode);
+      await sleep(10);
+      maze.render(document.getElementsByClassName('test_canvas')[index], 500, maze_size, show_grid, 'custom_maze');
     }
   }
 }

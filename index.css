@@ -75,6 +75,10 @@ body {
   margin: 10px 50px;
 }
 
+.content .textbox img {
+  width: 80%;
+}
+
 .content #backtrack_steps{
   display: grid;
   grid-template-columns: repeat(4, 1fr);

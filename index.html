@@ -71,7 +71,7 @@
         <br />
         <p>
           By choosing random directions and building "bridges" between nodes, the Backtracking is one of the most
-          simpler methods to generate mazes. It works in this steps:
+          simpler methods to generate mazes. It works in these steps:
         </p>
         <br />
         <ol>
@@ -115,22 +115,112 @@
       </div>
       <div class="flexbox">
         <div class="test_canvas">
-          <form onsubmit="submitMaze(event)">
+          <form onsubmit="submitMaze(event, 0, 'backtrack')">
             <div class="controls_content">
-              <select name="maze_size" id="size_select">
+              <select name="maze_size" class="size_select">
                 <option value="50">10x10</option>
                 <option value="25">20x20</option>
                 <option value="20" selected="selected">25x25</option>
                 <option value="10">50x50</option>
               </select>
-              <label for="size">Maze size</label>
+              <label for="maze_size">Maze size</label>
             </div>
             <div class="controls_content">
-              <input type="checkbox" id="show_grid" name="grid" value="false">
-              <label for="show_grid">Show grid</label>
+              <input type="checkbox" class="show_grid" name="grid" value="false">
+              <label for="grid">Show grid</label>
             </div>
             <input type="submit" value="New maze">
           </form>
+        </div>
+      </div>
+      <br />
+      <h2>Prim's Algorithm</h2>
+      <div class="textbox">
+        <p>
+          The other algorithm for maze generation that I will show here is the Prim's algorithm.
+          Prim's is a greedy algorithm that finds a minimum spanning tree for a undirected graph.
+          In other words, the algorithm finds a subgraph from the main graph where the total
+          weight of all the edges in the tree is minimized and all vertex are connected.
+        </p>
+        <br />
+        <p>
+          The Prim's algorithm was developed in 1930 by Czech mathematician Vojtěch Jarník - just to emphasize,
+          the first eletronic computer was built in 1942 - and later rediscovered and republished
+          by computer scientists Robert C. Prim in 1957 (that gives name to it) and Edsger W. Dijkstra (another
+          scientist well known for his algorithms) in 1959.
+        </p>
+        <br />
+        <p>
+          To simplify, lets analyse a practical example. Imagine five cities connected by dirt roads, like
+          in the first figure of the graph below (buildings are cities and dashed lines are roads, the numbers are the
+          length of the road). So, we want to pave the roads in a way that all cities are interconnected using the least
+          amount of asphalt possible. This is exactly the kind of problem that Prim's algorithm becomes useful, once it
+          finds the shorter path that connect all vertices. If we apply the algorithm in this problem, the result is
+          in the next sequence (the orange city is the source vertice, where the algorithm starts, and the red edges
+          are the paved roads).
+        </p>
+        <br />
+        <div class="flexbox">
+          <img src="assets/prims-graph.png" />
+        </div>
+        <br />
+        <p>
+          But, the example above is for graphs. Here we are working with bidimensional matrixes, and the algorithm
+          needed some adaptation to work for this purpouse. So, if the Prim's use is connect vertices through edges, we
+          can also use it to generate randomic mazes. In fact, it is a simple algorithm, these are the steps I followed
+          to program it:
+        </p>
+        <br />
+        <ol>
+          <li>Start with a bidimensional array full of cells in state Blocked (walls).</li>
+          <li>
+            Pick a source cell, set it to state Passage and compute its frontier cells. A frontier
+            cell of a Cell is a cell with distance 2 in state Blocked and within the grid.
+          </li>
+          <li>
+            While the list of frontier cells is not empty:
+            <ol>
+              <li>Pick a random frontier cell from the list of frontier cells.</li>
+              <li>
+                Get all neighbors from this frontier cell. A neighbor from a cell are all cells in distance
+                2 in state Passage and within the grid.
+              </li>
+              <li>
+                Pick a random neighbor and connect the frontier cell with the neighbor by setting
+                the cell in-between to state Passage.
+              </li>
+              <li>Compute the frontier cells of the chosen frontier cell and add them to the frontier list.</li>
+              <li>Remove the chosen frontier cell from the list of frontier cells.</li>
+            </ol>
+          </li>
+          <ul>
+            <li>A Cell (node) has 2 states: Blocked or Passage.</li>
+            <li>We use 2 for distance because we need to consider the walls as a integer cell of the grid</li>
+          </ul>
+        </ol>
+        <br />
+        <p>
+          Now, we can see the Prim's generating random mazes in practice:
+        </p>
+        <div class="flexbox">
+          <div class="test_canvas">
+            <form onsubmit="submitMaze(event, 1, 'prims')">
+              <div class="controls_content">
+                <select name="maze_size" class="size_select">
+                  <option value="50">10x10</option>
+                  <option value="25">20x20</option>
+                  <option value="20" selected="selected">25x25</option>
+                  <option value="10">50x50</option>
+                </select>
+                <label for="maze_size">Maze size</label>
+              </div>
+              <div class="controls_content">
+                <input type="checkbox" class="show_grid" name="grid" value="false">
+                <label for="grid">Show grid</label>
+              </div>
+              <input type="submit" value="New maze">
+            </form>
+          </div>
         </div>
       </div>
     </div>

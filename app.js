@@ -16,7 +16,8 @@ maze.assignSource(SOURCE);
 maze.assignTarget(TARGET);
 
 //RecursiveBacktrack.mazeGenerator(maze, SOURCE);
-generateMaze(20, false);
+generateMaze(20, false, 0, 'backtrack');
+generateMaze(20, false, 1, 'prims');
 //maze.render(document.getElementsByClassName('test_canvas')[0], MAZE_SIZE, CELL_SIZE);
 
 //Prims.mazeGenerator(maze, SOURCE);
