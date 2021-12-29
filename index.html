@@ -29,7 +29,7 @@
           A maze is a path, or collection of paths, that tipically lead from an entrance to a goal.
           Mazes have been a widely studied topic in Computer Science, with many algorithms
           dedicated to building and solving them. Various data structures can represent mazes and labyrinths,
-          like graphs, trees and, in the case of Algorythm, bidimensional arrays - or matrixes.
+          like graphs, trees and, in the case of Algorythm, bidimensional arrays (matrixes).
         </p>
         <div class="static_mazes">
           <!-- HERE IS THE THREE SAMPLE MAZES `drawings/sampleMazes.js`-->
@@ -161,7 +161,7 @@
         </p>
         <br />
         <div class="flexbox">
-          <img src="assets/prims-graph.png" />
+          <img class="prims-img" src="assets/prims-graph.png" />
         </div>
         <br />
         <p>
@@ -202,27 +202,142 @@
         <p>
           Now, we can see the Prim's generating random mazes in practice:
         </p>
-        <div class="flexbox">
-          <div class="test_canvas">
-            <form onsubmit="submitMaze(event, 1, 'prims')">
-              <div class="controls_content">
-                <select name="maze_size" class="size_select">
-                  <option value="50">10x10</option>
-                  <option value="25">20x20</option>
-                  <option value="20" selected="selected">25x25</option>
-                  <option value="10">50x50</option>
-                </select>
-                <label for="maze_size">Maze size</label>
-              </div>
-              <div class="controls_content">
-                <input type="checkbox" class="show_grid" name="grid" value="false">
-                <label for="grid">Show grid</label>
-              </div>
-              <input id="newPrimsButton" type="submit" value="New maze">
-            </form>
-          </div>
+      </div>
+      <br />
+      <div class="flexbox">
+        <div class="test_canvas">
+          <form onsubmit="submitMaze(event, 1, 'prims')">
+            <div class="controls_content">
+              <select name="maze_size" class="size_select">
+                <option value="50">10x10</option>
+                <option value="25">20x20</option>
+                <option value="20" selected="selected">25x25</option>
+                <option value="10">50x50</option>
+              </select>
+              <label for="maze_size">Maze size</label>
+            </div>
+            <div class="controls_content">
+              <input type="checkbox" class="show_grid" name="grid" value="false">
+              <label for="grid">Show grid</label>
+            </div>
+            <input id="newPrimsButton" type="submit" value="New maze">
+          </form>
         </div>
       </div>
+      <br />
+      <h2>A* Pathfinding</h2>
+      <div class="textbox">
+        <p>
+          The A* is an algorithm for pathfinding. It searchs the ideal path in a graph from an initial vertex
+          to a goal vertex. It is very useful and used, its applications ranges from apps to find commuting routes
+          between locations to solving problems, such as solving a puzzle (a maze, for example) and is very used in
+          videogames. Although it isn't the fastest of the algorithms for pathfinding in the best cases, the A* has
+          the most consistent performance in different scenarios and puzzles.
+        </p>
+        <br />
+        <p>
+          The algorithm was first described in 1968 by Peter Hart, Nils Nilsson, and Bertram Raphael. It is a kind of
+          combination of the heuristics from Breadth First Search (BFS) and the formality of the Dijkstra's algorithm.
+          The A* works based on the concept of cost, where each vertex has a value associated depending on distance,
+          obstacles, terrain, etc. This feature makes the A* very flexible and expands considerably its usage
+          possibilities.
+        </p>
+        <br />
+        <p>
+          For example, imagine a game where a NPC have to calculate the best route from a start to a final point.
+          Well, any pathfinding algorithm can handle that, but what if our game's map has a big river where the NPC
+          moves very slowly, and now the best path is passing by a bridge? Algorithms that consider just the edges in
+          an euclidean logic aren't the best choice in this case. Using A*, in the other hand, is the ideal choice.
+          To accomplish the task of finding the route even with different terrains and obstacles, it is enough to add
+          a higher cost to the paths that present disadvantage to the NPC. Then, when the NPC calculate the route it
+          will consider the lower cost path.
+        </p>
+        <p>
+          For our maze solving, two costs were considered:
+        <ul>
+          <li><b>G: </b>the cost to move to the next node;</li>
+          <li><b>H: </b>the estimated cost (heuristic) to move from the source node to the goal;</li>
+          <li><b>F: </b>the sum of G and H.</li>
+        </ul>
+        So, G is the cost for moving from the current node to another adjascent node. It helps determine the next
+        step the path will follow. H, in fact, is a guessing. The H cost measure the distance from the source node
+        to the target node - by the way, the A* only works when you already know your origin and your destination -,
+        but, actually, we don't know the real distance until we know what path to follow (and it is exactly what
+        we are trying to do) because the route may have obstacles, walls and other things that we can't predict.
+        So, to determine the H cost we can use some heuristic that measure this distance. In this algorithm I've
+        used two different heuristics for the purpose of comparison: the euclidean distance and the manhattan
+        distance. Finally, the F cost is what drives our algorithm. The node with the smaller sum of G and H (F) is
+        the next node for our path.
+        </p>
+
+        <br />
+        <div class="flexbox">
+          <ul>
+            <li><b>Euclidean Distance: </b>is the length of a line segment between two points.</li>
+            <li>
+              <b>Manhattan Distance: </b>the sum of the absolute differences between two vectors. In other words,
+              is the distance disconsidering diagonals and percorring just straight paths.
+            </li>
+          </ul>
+          <img class="heuristic-img" src="assets/heuristics.png" />
+        </div>
+        <br />
+      </div>
+      <div class="textbox">
+        <p>
+          The A* algorithm is a bit complex, these are the steps I followed to implement it:
+        </p>
+        <br />
+        <ol>
+          <li>
+            First, create two arrays, the open and closed. The open array is, basically, a list with the nodes
+            that we need to verify if will be part of our path or not. The closed array is a list with the nodes
+            that we've already checked;
+          </li>
+          <li>Add the source node to the open list;</li>
+          <li>
+            Repeat:
+            <ol>
+              <li>Pick the node with the lower F cost in open list. This is our current node;</li>
+              <li>Move the current node to closed list;</li>
+              <li>For each one of the 8 adjascent nodes of the current node:
+                <ul>
+                  <li>If the neighbor node isn't passable or if it is in the closed list, ignore. Else:
+                    <ol>
+                      <li>
+                        If isn't in the open list, add the node to it. Make the current node the parent
+                        of this node. Calculate and save the costs F, G and H of this node.
+                      </li>
+                      <li>
+                        If the node already is in the open list, check if the G cost of this node is lower
+                        going by this path. If so, change this node's parent to the current node and update
+                        the G and F costs of this node.
+                      </li>
+                    </ol>
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          </li>
+          <li>
+            Stop when:
+            <ul>
+              <li>Add the target node to the closed list (have found the path), or</li>
+              <li>Don't find the target node and the open list is empty. In this case,
+                there is none path.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+      <br />
+      <div class="textbox">
+        Well then, now we can explore the three maze algorithms. Below, you can custom your own maze
+        by choosing between Backtracking or Prim's algorithms to generate a random labyrinth and then
+        apply the A* to find a path and solve it!
+      </div>
+      <!-- end of content -->
     </div>
   </div>
   <footer></footer>

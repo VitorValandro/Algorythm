@@ -75,10 +75,6 @@ body {
   margin: 10px 50px;
 }
 
-.content .textbox img {
-  width: 80%;
-}
-
 .content #backtrack_steps{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -112,9 +108,11 @@ body {
   margin: 20px 0;
 }
 
-#canvas{
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.heuristic-img{
+  width: 250px;
+  height: 200px;
+}
+
+.prims-img {
+  width: 80%;
 }
