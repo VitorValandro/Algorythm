@@ -66,7 +66,7 @@ class Maze {
     return nodesAround;
   }
 
-  render(element, mazeSize, cellSize, stroke = true) {
+  async render(element, mazeSize, cellSize, stroke = true, id = undefined) {
     this.assignSource();
     this.assignTarget();
 
@@ -75,6 +75,7 @@ class Maze {
       this.canvas = document.createElement('canvas');
       this.canvas.width = mazeSize;
       this.canvas.height = mazeSize;
+      this.canvas.id = id;
     }
     const ctx = this.canvas.getContext('2d');
 

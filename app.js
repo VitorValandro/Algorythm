@@ -12,13 +12,12 @@ const CELL_SIZE = 10;
 const maze = new Maze(MAZE_SIZE / CELL_SIZE, MAZE_SIZE / CELL_SIZE, SOURCE, TARGET);
 //maze.recursiveBacktrack(SOURCE);
 
-
 maze.assignSource(SOURCE);
 maze.assignTarget(TARGET);
 
-RecursiveBacktrack.mazeGenerator(maze, SOURCE);
-
-maze.render(document.getElementById('canvas'), MAZE_SIZE, CELL_SIZE);
+//RecursiveBacktrack.mazeGenerator(maze, SOURCE);
+generateMaze(20, false);
+//maze.render(document.getElementsByClassName('test_canvas')[0], MAZE_SIZE, CELL_SIZE);
 
 //Prims.mazeGenerator(maze, SOURCE);
 

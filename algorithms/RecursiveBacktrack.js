@@ -1,5 +1,5 @@
 class RecursiveBacktrack {
-  static mazeGenerator(maze, node) {
+  static async mazeGenerator(maze, node) {
     /*
       This is an algorithm to generate randomized mazes
       it receives as input the sourceNode from the maze will start

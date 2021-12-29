@@ -50,3 +50,9 @@ function sleep(ms) {
     resolve => setTimeout(resolve, ms)
   );
 }
+
+function sleep2(time) {
+  return (new Promise(function (resolve, reject) {
+    setTimeout(function () { resolve(); }, time);
+  }));
+}

@@ -83,7 +83,23 @@ body {
 }
 
 .content #backtrack_steps img{
-  width: 222px;
+  width: 180px;
+}
+
+.content .test_canvas{
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.content .test_canvas form{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .static_mazes {

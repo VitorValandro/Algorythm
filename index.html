@@ -109,10 +109,30 @@
         </div>
         <br />
         <div class="textbox">
-          <p>Well, now you can play and test the algorithm generating random mazes:</p>
+          <p>Here is a sample maze generated using Recursive Backtracking: </p>
+        </div>
+        <br />
+      </div>
+      <div class="flexbox">
+        <div class="test_canvas">
+          <form onsubmit="submitMaze(event)">
+            <div class="controls_content">
+              <select name="maze_size" id="size_select">
+                <option value="50">10x10</option>
+                <option value="25">20x20</option>
+                <option value="20" selected="selected">25x25</option>
+                <option value="10">50x50</option>
+              </select>
+              <label for="size">Maze size</label>
+            </div>
+            <div class="controls_content">
+              <input type="checkbox" id="show_grid" name="grid" value="false">
+              <label for="show_grid">Show grid</label>
+            </div>
+            <input type="submit" value="New maze">
+          </form>
         </div>
       </div>
-      <div id="canvas"></div>
     </div>
   </div>
   <footer></footer>
