@@ -52,6 +52,7 @@ class Prims {
     let frontierNodesList = maze.getNodesAround(sourceNode, [-2, 2, 0], maze.isNodeAWall.bind(maze));
     // while the list of frontier cells is not empty:
     while (frontierNodesList.length > 0) {
+      document.getElementById('newPrimsButton').disabled = true;
       // pick a random frontier cell from the list of frontier cells.
       let frontierNode = randomChoice(frontierNodesList);
       // let neighbors(frontierCell) = All cells in distance 2 in state Passage
@@ -78,5 +79,6 @@ class Prims {
       await sleep(10);
       maze.render(document.getElementsByClassName('test_canvas')[index], 500, maze_size, show_grid, 'custom_maze');
     }
+    document.getElementById('newPrimsButton').disabled = false;
   }
 }

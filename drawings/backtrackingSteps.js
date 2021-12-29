@@ -34,7 +34,6 @@ function generateMaze(CELL_SIZE, show_grid, index, algorithm = "backtrack") {
 
 function submitMaze(event, index, algorithm) {
   event.preventDefault();
-  console.log(document.getElementsByClassName('custom_maze'))
   document.getElementsByClassName('custom_maze')[index].remove();
   show_grid = document.getElementsByClassName('show_grid')[index].checked;
   maze_size = document.getElementsByClassName('size_select')[index].value;
