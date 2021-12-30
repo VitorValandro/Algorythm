@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;400;700&display=swap');
+
+:root{
+  --darker: #000000;
+  --bg-dark: #292929;
+  --medium-grey: #1F1F1F;
+  --dark-grey: #121212;
+  --light-grey: #7B7B7B;
+  --white: #E1E1E1;
+  --source: #27BB65;
+  --target: #FD413C;
+  --wall: #1F1F1F;
+  --path: #313C45;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Yantramanav', 'comic-sans';
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+.flexbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background-color: var(--dark-grey);
+  width: 100%;
+  height: 50px;
+}
+
+.links ul li {
+  list-style: none;
+}
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content h1 {
+  margin: 20px 0 0 0;
+}
+
+.content hr {
+  margin: 10px 0;
+}
+
+.content .textbox p {
+  font-size: 1.1em;
+  text-align: justify;
+}
+
+.content .textbox li {
+  margin: 10px 50px;
+}
+
+.footer-container{
+  display: flex;
+  background-color: var(--darker);
+  width: 100%;
+  height: 20%;
+  color: white;
+  justify-content:space-between;
+  padding: 20px 5%;
+}
+
+.footer-left{
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.footer-right{
+  display: flex;
+  align-items: center;
+}
+
+.footer-icon{
+  padding: 10px;
+  margin-left: 10px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid var(--light-grey);
+  cursor: pointer;
+}

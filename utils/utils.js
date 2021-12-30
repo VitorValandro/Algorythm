@@ -1,3 +1,11 @@
+function loadImages(element, path, images) {
+  images.forEach(image => {
+    const img = document.createElement("img");
+    img.src = path + image;
+    element.appendChild(img);
+  })
+};
+
 function isArrayEquals(arr1, arr2) {
   // it works only in 1d arrays without nested arrays
   if (!arr1 || !arr2)
@@ -49,10 +57,4 @@ function sleep(ms) {
   return new Promise(
     resolve => setTimeout(resolve, ms)
   );
-}
-
-function sleep2(time) {
-  return (new Promise(function (resolve, reject) {
-    setTimeout(function () { resolve(); }, time);
-  }));
 }

@@ -1,12 +1,42 @@
-let FINAL_MAZE;
+/*
+* This file has functions that help create the maze samples for mazes page.
+*/
 
-function loadImages(element, path, images) {
-  images.forEach(image => {
-    const img = document.createElement("img");
-    img.src = path + image;
-    element.appendChild(img);
-  })
-}
+const sample_mazes = [
+  {
+    maze_size: 200,
+    cell_size: 20,
+    source: [1, 1],
+    target: [8, 8],
+  },
+  {
+    maze_size: 200,
+    cell_size: 10,
+    source: [1, 1],
+    target: [18, 18],
+  },
+  {
+    maze_size: 200,
+    cell_size: 5,
+    source: [1, 1],
+    target: [38, 38],
+  },
+];
+
+sample_mazes.forEach(sample => {
+  const sample_maze = new Maze(
+    sample.maze_size / sample.cell_size,
+    sample.maze_size / sample.cell_size,
+    sample.maze_size,
+    sample.cell_size,
+    sample.source,
+    sample.target
+  );
+  RecursiveBacktrack.mazeGenerator(sample_maze, [1, 1]);
+  sample_maze.render(document.getElementsByClassName('static_mazes')[0], stroke = false, 'sample');
+});
+
+let FINAL_MAZE;
 
 function generateMaze(CELL_SIZE, show_grid, index, algorithm = "backtrack") {
   const MAZE_SIZE = 500;
@@ -33,7 +63,7 @@ function generateMaze(CELL_SIZE, show_grid, index, algorithm = "backtrack") {
   if (index == 2) {
     FINAL_MAZE = maze;
   }
-}
+};
 
 function submitMaze(event, index, algorithm = undefined) {
   event.preventDefault();
@@ -48,9 +78,9 @@ function submitMaze(event, index, algorithm = undefined) {
   }
 
   generateMaze(cell_size, show_grid, index, algorithm);
-}
+};
 
 function solveMaze() {
   heuristic = document.getElementsByClassName('heuristics_select')[0].value;
   aStar.discover(FINAL_MAZE, heuristic, 2);
-}
+};
