@@ -44,8 +44,19 @@ body {
   height: 50px;
 }
 
-.links ul li {
+.links {
+  display: flex;
+  width: 10%;
+  justify-content: space-around;
+}
+
+.links li {
   list-style: none;
+}
+
+.links li a {
+  color: var(--white);
+  text-decoration: none;
 }
 
 .container{

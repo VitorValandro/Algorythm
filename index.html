@@ -7,16 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="base.css" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
-  <title>Path finding</title>
+  <title>Mazes - Algorythm</title>
 </head>
 
 <body>
   <nav class="menu">
-    <div class="links">
-      <ul>
-        <li>Mazes</li>
-      </ul>
-    </div>
+    <ul class="links">
+      <li><a href="index.html">Mazes</a></li>
+      <li><a href="arrays.html">Arrays</a></li>
+    </ul>
     <div class="logo">
       <span>Algorythm</span>
     </div>
@@ -405,13 +404,23 @@
   </footer>
 
   <script src="utils/utils.js"></script>
-  <script src="Maze.js"></script>
+  <script src="views/MazeView.js"></script>
   <script src="algorithms/aStar.js"></script>
   <script src="algorithms/Prims.js"></script>
   <script src="algorithms/RecursiveBacktrack.js"></script>
 
   <script src="utils/sampleMazes.js"></script>
-  <script src="app.js"></script>
+  <script>
+    loadImages(
+      document.getElementById("backtrack_steps"),
+      "assets/backtracking/",
+      ["1.PNG", "2.PNG", "3.PNG", "4.PNG", "5.PNG", "6.PNG", "7.PNG", "all.gif"]
+    );
+
+    generateMaze(20, false, 0, 'backtrack');
+    generateMaze(20, false, 1, 'prims');
+    generateMaze(20, false, 2, 'backtrack');
+  </script>
 </body>
 
 </html>
