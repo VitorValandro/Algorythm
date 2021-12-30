@@ -1,16 +1,19 @@
 class Maze {
-  constructor(row, col, source, target) {
+  constructor(row, col, mazeSize, cellSize, source, target) {
     this.ROW = row;
     this.COL = col;
     this.source = source;
     this.target = target;
     this.canvas = document.createElement('canvas');
+    this.cellSize = cellSize;
+    this.mazeSize = mazeSize;
     this.cellColors = {
       0: "#1F1F1F", // possible path cells
       1: "#000000", // wall cells
       'S': "#27BB65", // source cell
       'T': "#FD413C", // target cell
-      'P': "#313C45" // traveled path cell
+      'P': "#313C45", // traveled path cell,
+      'R': "#daa520" // definitive route cell
     }
 
     this.matrix = (() => {
@@ -66,15 +69,15 @@ class Maze {
     return nodesAround;
   }
 
-  async render(element, mazeSize, cellSize, stroke = true, className = '') {
+  async render(element, stroke = true, className = '') {
     this.assignSource();
     this.assignTarget();
 
     if (this.canvas) {
       this.canvas.remove();
       this.canvas = document.createElement('canvas');
-      this.canvas.width = mazeSize;
-      this.canvas.height = mazeSize;
+      this.canvas.width = this.mazeSize;
+      this.canvas.height = this.mazeSize;
       this.canvas.classList.add(className)
     }
     const ctx = this.canvas.getContext('2d');
@@ -86,8 +89,8 @@ class Maze {
       for (let x = 0; x < this.COL; x++) {
         let index = x + y * this.COL;
         let cell = {}
-        cell.x = x * cellSize;
-        cell.y = y * cellSize;
+        cell.x = x * this.cellSize;
+        cell.y = y * this.cellSize;
         cell.type = this.matrix[x][y];
 
         cells[index] = cell;
@@ -98,12 +101,12 @@ class Maze {
       ctx.beginPath();
 
       ctx.fillStyle = this.cellColors[cell.type];
-      ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
+      ctx.fillRect(cell.x, cell.y, this.cellSize, this.cellSize);
 
       if (stroke)
         ctx.strokeStyle = "#7B7B7B";
 
-      ctx.strokeRect(cell.x, cell.y, cellSize, cellSize);
+      ctx.strokeRect(cell.x, cell.y, this.cellSize, this.cellSize);
     })
 
     element.appendChild(this.canvas);

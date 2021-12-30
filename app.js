@@ -7,6 +7,7 @@ loadImages(
 //RecursiveBacktrack.mazeGenerator(maze, SOURCE);
 generateMaze(20, false, 0, 'backtrack');
 generateMaze(20, false, 1, 'prims');
+generateMaze(20, false, 2, 'backtrack');
 //maze.render(document.getElementsByClassName('test_canvas')[0], MAZE_SIZE, CELL_SIZE);
 
 //Prims.mazeGenerator(maze, SOURCE);

@@ -129,7 +129,7 @@
               <input type="checkbox" class="show_grid" name="grid" value="false">
               <label for="grid">Show grid</label>
             </div>
-            <input type="submit" value="New maze">
+            <input class="newmaze_button" type="submit" value="New maze">
           </form>
         </div>
       </div>
@@ -220,7 +220,7 @@
               <input type="checkbox" class="show_grid" name="grid" value="false">
               <label for="grid">Show grid</label>
             </div>
-            <input id="newPrimsButton" type="submit" value="New maze">
+            <input class="newmaze_button" type="submit" value="New maze">
           </form>
         </div>
       </div>
@@ -337,10 +337,55 @@
         by choosing between Backtracking or Prim's algorithms to generate a random labyrinth and then
         apply the A* to find a path and solve it!
       </div>
+      <br />
+      <div class="flexbox">
+        <div class="test_canvas">
+          <form class="control_canvas" onsubmit="submitMaze(event, 2)">
+            <div class="flexbox-around">
+              <div class="controls_content">
+                <select name="maze_size" class="size_select">
+                  <option value="50">10x10</option>
+                  <option value="25">20x20</option>
+                  <option value="20" selected="selected">25x25</option>
+                  <option value="10">50x50</option>
+                </select>
+                <label for="maze_size">Maze size</label>
+              </div>
+              <div class="controls_content">
+                <input type="checkbox" class="show_grid" name="grid" value="false">
+                <label for="grid">Show grid</label>
+              </div>
+              <div class="controls_content">
+                <select name="maze_generator" class="generator_select">
+                  <option value="backtrack" selected="selected">Backtrack</option>
+                  <option value="prims">Prim's</option>
+                </select>
+                <label for="maze_generator">Maze generation algorithm</label>
+              </div>
+              <div class="controls_content">
+                <select name="astar_heuristics" class="heuristics_select">
+                  <option value="manhattan" selected="selected">Manhattan</option>
+                  <option value="euclidean">Euclidean</option>
+                </select>
+                <label for="maze_generator">A* heuristics</label>
+              </div>
+            </div>
+            <div class="flexbox-around">
+              <input class="newmaze_button" type="submit" value="New maze">
+              <input id="solvemaze_button" onclick="solveMaze()" type="button" value="Solve maze">
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <p>Well, that's it for maze algorithms! Soon I'll add more generating and pathfinding algorithms.
+        I really hope you enjoyed and learned something here!</p>
       <!-- end of content -->
     </div>
   </div>
-  <footer></footer>
+  <footer>
+
+  </footer>
 
   <script src="utils.js"></script>
   <script src="Maze.js"></script>

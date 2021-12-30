@@ -23,9 +23,11 @@ sample_mazes.forEach(sample => {
   const sample_maze = new Maze(
     sample.maze_size / sample.cell_size,
     sample.maze_size / sample.cell_size,
+    sample.maze_size,
+    sample.cell_size,
     sample.source,
     sample.target
   );
   RecursiveBacktrack.mazeGenerator(sample_maze, [1, 1]);
-  sample_maze.render(document.getElementsByClassName('static_mazes')[0], sample.maze_size, sample.cell_size, stroke = false, 'sample');
+  sample_maze.render(document.getElementsByClassName('static_mazes')[0], stroke = false, 'sample');
 })

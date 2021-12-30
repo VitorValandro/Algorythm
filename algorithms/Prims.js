@@ -39,7 +39,7 @@
 
 class Prims {
   // start with a Grid full of nodes in state Wall
-  static async mazeGenerator(maze, sourceNode, maze_size, show_grid, index) {
+  static async mazeGenerator(maze, sourceNode, show_grid, index) {
     maze.matrix = Array(maze.ROW)
       .fill(null)
       .map(() => Array(maze.COL).fill(1));
@@ -52,7 +52,9 @@ class Prims {
     let frontierNodesList = maze.getNodesAround(sourceNode, [-2, 2, 0], maze.isNodeAWall.bind(maze));
     // while the list of frontier cells is not empty:
     while (frontierNodesList.length > 0) {
-      document.getElementById('newPrimsButton').disabled = true;
+      document.getElementsByClassName('newmaze_button')[index].disabled = true;
+      if (index == 2)
+        document.getElementById('solvemaze_button').disabled = true;
       // pick a random frontier cell from the list of frontier cells.
       let frontierNode = randomChoice(frontierNodesList);
       // let neighbors(frontierCell) = All cells in distance 2 in state Passage
@@ -77,8 +79,9 @@ class Prims {
       // remove the chosen frontier cell from the list of frontier cells
       removeItem(frontierNodesList, frontierNode);
       await sleep(10);
-      maze.render(document.getElementsByClassName('test_canvas')[index], 500, maze_size, show_grid, 'custom_maze');
+      maze.render(document.getElementsByClassName('test_canvas')[index], show_grid, 'custom_maze');
     }
-    document.getElementById('newPrimsButton').disabled = false;
+    document.getElementsByClassName('newmaze_button')[index].disabled = false;
+    document.getElementById('solvemaze_button').disabled = false;
   }
 }

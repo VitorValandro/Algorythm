@@ -102,6 +102,18 @@ body {
   justify-content: space-around;
 }
 
+.content .test_canvas .control_canvas{
+  width: 150%;
+  display: flex;
+  flex-direction: column;
+}
+
+.flexbox-around{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .static_mazes {
   display: flex;
   justify-content: space-evenly;

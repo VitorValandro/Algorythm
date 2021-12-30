@@ -1,5 +1,5 @@
 class aStar {
-  static manhattamDistance(currentNode, targetNode) {
+  static manhattanDistance(currentNode, targetNode) {
     // method to determine the Manhattam Distance used as Heuristic (H) to a* algorithm
     return Math.abs(targetNode[0] - currentNode[0]) +
       Math.abs(targetNode[1] - currentNode[1]);
@@ -45,9 +45,9 @@ class aStar {
     return maze.getNodesAround(currentNode, INDEX, maze.isNodePassable.bind(maze));
   }
 
-  static async discover(maze, source, target, heuristic = "manhattam") {
+  static async discover(maze, heuristic = "manhattan", index) {
     const heuristicAlgorithms = {
-      "manhattam": aStar.manhattamDistance,
+      "manhattan": aStar.manhattanDistance,
       "euclidean": aStar.euclideanDistance
     }
     // Initialize open and close lists
@@ -55,8 +55,8 @@ class aStar {
     let closedList = [];
 
     // create nodes for start point and end point
-    const sourceNode = new MazeNode(source);
-    const targetNode = new MazeNode(target);
+    const sourceNode = new MazeNode(maze.source);
+    const targetNode = new MazeNode(maze.target);
 
     // populate openList with start point
     openList.push(sourceNode);
@@ -88,7 +88,7 @@ class aStar {
           && !isArrayEquals([i, j], targetNode.index))
           maze.matrix[i][j] = 'P'; // colors node in maze
       })
-      maze.render(document.getElementById('canvas'), MAZE_SIZE, CELL_SIZE);
+      maze.render(document.getElementsByClassName('test_canvas')[index], false, 'custom_maze');
       // have found the goal
       if (isArrayEquals(currentNode.index, targetNode.index)) {
         let path = [];
@@ -97,6 +97,8 @@ class aStar {
           path.push(current.index); // save the path indexes in path array
           current = current.parent; // iterate over nodes by parent pointer
         }
+        path.forEach(index => maze.matrix[index[0]][index[1]] = 'R');
+        maze.render(document.getElementsByClassName('test_canvas')[index], false, 'custom_maze');
         return path;
       }
 
