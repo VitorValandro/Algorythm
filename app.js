@@ -9,3 +9,7 @@ function randomArray(length) {
 
 const array = new ArrayView(randomArray(10), 500);
 array.render(document.getElementById("tempboilerplate"));
+
+let barA = array.bars[0]
+let barB = array.bars[1]
+array.swap(barB, barA);
