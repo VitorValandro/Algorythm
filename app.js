@@ -11,4 +11,5 @@ const array = new ArrayView(randomArray(10), 500, document.getElementById("tempb
 array.render();
 
 //BubbleSort.sort(array);
-SelectionSort.sort(array);
+//SelectionSort.sort(array);
+InsertionSort.sort(array);

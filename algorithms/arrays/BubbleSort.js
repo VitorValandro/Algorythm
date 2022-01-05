@@ -10,14 +10,19 @@ class BubbleSort {
       for (let j = 0; j < view.array.length - i - 1; j++) {
         if (view.array[j] > view.array[j + 1]) {
           await sleep(250);
-          await view.swap(j, j + 1, view);
+          await view.swap(j + 1, j);
           swapped = true;
         }
       }
 
       view.bars[view.array.length - i - 1].color = '#27BB65' // color the sorted bars
-      if (swapped == false)
+      if (swapped == false) {
         break;
+      }
     }
+
+    // just to color all sorted bars
+    view.bars.forEach(bar => bar.color = '#27BB65')
+    view.render();
   }
 }

@@ -19,7 +19,7 @@ class ArrayView {
 
     return this.array.reduce((arr, item, index) => {
       let color = "#313C45";
-      if (self.bars && self.bars[index].color != color && self.bars[index].color != 'red') {
+      if (self.bars && self.bars[index].color != color && self.bars[index].color != '#FD413C') {
         color = self.bars[index].color;
       }
 
@@ -47,8 +47,8 @@ class ArrayView {
     this.array[a] = this.array[b];
     this.array[b] = temp;
 
-    const barLeft = this.bars[b];
-    const barRight = this.bars[a];
+    const barLeft = this.bars[a];
+    const barRight = this.bars[b];
 
     /*
     *   saves the current color of barLeft before change it to red.
