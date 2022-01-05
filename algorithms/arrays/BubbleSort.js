@@ -1,27 +1,21 @@
 class BubbleSort {
-  static swap(a, b, view) {
-    // a is bigger than b
-
-    let temp = view.array[a];
-    view.array[a] = view.array[b];
-    view.array[b] = temp;
-    view.swap(view.bars[b], view.bars[a]);
-  }
-
-  static async sort(arrayView) {
+  static async sort(view) {
     let swapped;
 
-    for (let i = 0; i < arrayView.array.length - 1; i++) {
+    // iter through all elements
+    for (let i = 0; i < view.array.length - 1; i++) {
       swapped = false;
 
-      for (let j = 0; j < arrayView.array.length - i - 1; j++) {
-
-        if (arrayView.array[j] > arrayView.array[j + 1]) {
-          await sleep(750);
-          BubbleSort.swap(j, j + 1, arrayView);
+      // continue itering, but ignore the last i elements cause they're already in place
+      for (let j = 0; j < view.array.length - i - 1; j++) {
+        if (view.array[j] > view.array[j + 1]) {
+          await sleep(250);
+          await view.swap(j, j + 1, view);
           swapped = true;
         }
       }
+
+      view.bars[view.array.length - i - 1].color = '#27BB65' // color the sorted bars
       if (swapped == false)
         break;
     }
