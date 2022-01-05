@@ -7,9 +7,8 @@ function randomArray(length) {
   return arr;
 }
 
-const array = new ArrayView(randomArray(10), 500);
-array.render(document.getElementById("tempboilerplate"));
+const array = new ArrayView(randomArray(10), 500, document.getElementById("tempboilerplate"));
+array.render();
 
-let barA = array.bars[0]
-let barB = array.bars[1]
-BubbleSort.sort(array);
+//BubbleSort.sort(array);
+SelectionSort.sort(array);
