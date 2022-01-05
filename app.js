@@ -7,9 +7,16 @@ function randomArray(length) {
   return arr;
 }
 
-const array = new ArrayView(randomArray(10), 500, document.getElementById("tempboilerplate"));
-array.render();
+const LIST = randomArray(10);
 
+let bubbleSort_array = new ArrayView(LIST, 500, document.getElementById("bubbleSort_canvas"));
+bubbleSort_array.render();
+
+let insertionSort_array = new ArrayView(LIST, 500, document.getElementById("insertionSort_canvas"));
+insertionSort_array.render();
+
+let selectionSort_array = new ArrayView(LIST, 500, document.getElementById("selectionSort_canvas"));
+selectionSort_array.render();
 //BubbleSort.sort(array);
 //SelectionSort.sort(array);
-InsertionSort.sort(array);
+//InsertionSort.sort(array);

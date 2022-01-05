@@ -13,7 +13,7 @@
 <body>
   <nav class="menu">
     <ul class="links">
-      <li><a href="index.html">Mazes</a></li>
+      <li><a href="mazes.html">Mazes</a></li>
       <li><a href="arrays.html">Arrays</a></li>
     </ul>
     <div class="logo">
@@ -22,13 +22,122 @@
   </nav>
   <div class="container">
     <div class="content">
-      <div class="flexbox">
-        <div id="tempboilerplate"></div>
+      <h1>Arrays</h1>
+      <br />
+      <div class="textbox">
+        <p>Arrays are one of the most used and useful data structures in programming. Basically,
+          an array is a collection of elements identified by at least one index or key.</p>
+        <p>
+          In this section, I will present some algorithms to shuffle, sort and search in arrays.
+          This is the basis of algorithms, arrays are used in many other more complex problems and be able
+          to implement these simple functions is a very important skill to a developer. So, there is my
+          motivation to this page and to Algorythm, understand data structures and algorithms to always know
+          what is going on under the hood.
+        </p>
+      </div>
+      <br />
+      <h2>Sort algorithms</h2>
+      <br />
+      <div class="textbox">
+        <p>
+          Sort algorithms are used to put the elements of an array into an logical order. This is a very
+          important feature, once other algorithms (such as search and merge algorithms) require input data
+          to be in sorted lists. Because of that, optimization and efficiency are very important here.
+          Let's take a look and visualize how some algorithms sort the data in an array.
+        </p>
+      </div>
+      <br />
+      <h3>Bubble Sort</h3>
+      <br />
+      <div class="textbox">
+        <p>
+          Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps
+          through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through
+          the list is repeated until the list is sorted. The algorithm, which is a comparison sort, is named for the way
+          smaller or larger elements "bubble" to the top of the list.
+        </p>
+        <p>
+          This simple algorithm performs poorly in real world use and is used primarily as an educational tool.
+        </p>
+      </div>
+      <br />
+      <div class="flexbox sampleBars">
+        <div id='bubbleSort_canvas'></div>
+        <div class='control_canvas'>
+          <button onClick='BubbleSort.sort(bubbleSort_array)'>Sort</button>
+        </div>
+      </div>
+      <br />
+      <h3>Insertion Sort</h3>
+      <br />
+      <div class="textbox">
+        <p>
+          Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.
+          It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge
+          sort.
+        </p>
+        <br />
+        <p>Pseudocode to sort an array of size n in ascending order:
+        <ol>
+          <li>Iterate from arr[1] to arr[n] over the array.</li>
+          <li>Compare the current element (key) to its predecessor.</li>
+          <li>If the key element is smaller than its predecessor, compare it to the elements before.
+            Move the greater elements one position up to make space for the swapped element.</li>
+        </ol>
+        </p>
+        <p>
+          The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and
+          placed at the correct position in the sorted part. It's like the Bubble Sort, but instead the larger elements
+          "bubble" to the top, the smaller elements seems to "sink" to their right positions.
+        </p>
+      </div>
+      <br />
+      <div class="flexbox sampleBars">
+        <div id='insertionSort_canvas'></div>
+        <div class='control_canvas'>
+          <button onClick='InsertionSort.sort(insertionSort_array)'>Sort</button>
+        </div>
+      </div>
+      <br />
+      <h3>Selection Sort</h3>
+      <br />
+      <div class="textbox">
+        <p>
+          selection sort is an in-place comparison sorting algorithm. It has an O(n2) time complexity, which makes it
+          inefficient
+          on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its
+          simplicity
+          and has performance advantages over more complicated algorithms in certain situations, particularly where
+          auxiliary
+          memory is limited.
+        </p>
+        <br />
+        <p>
+          The algorithm divides the input list into two parts: a sorted sublist of items which is built up from left to
+          right at the front (left) of the list and a sublist of the remaining unsorted items that occupy the rest of
+          the list. Initially, the sorted sublist is empty and the unsorted sublist is the entire input list. The
+          algorithm proceeds by finding the smallest (or largest, depending on sorting order) element in the unsorted
+          sublist, exchanging (swapping) it with the leftmost unsorted element (putting it in sorted order), and moving
+          the sublist boundaries one element to the right.
+        </p>
+        <br />
+        <p>
+          One thing which distinguishes selection sort from other sorting algorithms is that it makes the minimum
+          possible number of swaps, n−1 in the worst case.
+        </p>
+      </div>
+      <br />
+      <div class="flexbox sampleBars">
+        <div id='selectionSort_canvas'></div>
+        <div class='control_canvas'>
+          <button onClick='SelectionSort.sort(selectionSort_array)'>Sort</button>
+        </div>
       </div>
     </div>
     <!-- END OF CONTENT -->
   </div>
-  <!--<footer class="footer-container">
+  <br />
+  <footer class="footer-container">
     <div class="footer-left">
       <span class="footer-title">Algorythm</span>
       <span class="footer-info">CS50x Introduction to Computer Science</span>
@@ -45,7 +154,7 @@
           title="Project repository" />
       </a>
     </div>
-  </footer>-->
+  </footer>
 
   <script src="utils/utils.js"></script>
   <script src="views/ArrayView.js"></script>
