@@ -6,7 +6,11 @@ class ArrayView {
     this.canvas.width = size;
     this.canvas.height = size / 2;
     this.ctx = this.canvas.getContext('2d');
-    this.bars = array.reduce((arr, item, index) => {
+    this.bars = this.generateVisualArray();
+  }
+
+  generateVisualArray() {
+    return this.array.reduce((arr, item, index) => {
       let bar = new Bar(
         1 * (index * 45) + 32.5, // x
         this.canvas.height - (this.canvas.height / 100 * item), // y
@@ -21,9 +25,7 @@ class ArrayView {
   }
 
   async swap(barLeft, barRight) {
-    const self = this;
     const left_x = barRight.x;
-    const right_x = barLeft.x;
     barLeft.color = "red";
     barRight.color = "red";
     while (barLeft.x > left_x) {
@@ -35,6 +37,7 @@ class ArrayView {
     }
     barLeft.color = "#313C45";
     barRight.color = "#313C45";
+    this.bars = this.generateVisualArray();
     this.render(document.getElementById("tempboilerplate"));
   }
 
