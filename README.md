@@ -15,3 +15,11 @@ This was the first kind of algorithm that I implement for Algorythm. The inspira
 <hr />
 ### Arrays
 Arrays are one of the most used and useful data structures in programming. Arrays are used in many other more complex problems and be able to implement these simple functions is a very important skill to a developer. So, there is my motivation to this page and to Algorythm, understand data structures and algorithms to always know what is going on under the hood. Here is an example of how Selection Sort algorithm sort an array:
+
+<br />
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/50156875/148546791-a9b09853-ec7b-40b5-aa11-f76c0e561717.gif">
+</div>
+
+
+###### Vitor Valandro da Rosa. December 2021.
