@@ -1,16 +1,22 @@
 class MergeSort {
-  static merge(left_arr, right_arr) {
+  static merge(left_arr, right_arr, view) {
+    // initialize the array that the two lists will merge into
     const merged_arr = [];
 
+    // while are elements in both arrays
     while (left_arr.length > 0 && right_arr.length > 0) {
+      // verify what is the bigger element to sorting
       if (left_arr[0] > right_arr[0]) {
+        // add element to merged_arr and remove from right_array
         merged_arr.push(right_arr.shift());
       }
       else {
+        // add element to merged_arr and remove from left_array
         merged_arr.push(left_arr.shift());
       }
     }
 
+    // iterates over the elements that doesn't were compared and just add them to merged_arr
     while (left_arr.length > 0) {
       merged_arr.push(left_arr.shift());
     }
@@ -19,19 +25,26 @@ class MergeSort {
       merged_arr.push(right_arr.shift());
     }
 
+    // return a single and sorted array
     return merged_arr;
   }
 
-  static sort(array) {
-    if (array.length == 1)
-      return array;
+  static sort(view) {
+    view.array = function sorting(array) {
+      // if the array can't be splited, return
+      if (array.length == 1)
+        return array;
 
-    let left_arr = array.slice(0, Math.floor(array.length / 2));
-    let right_arr = array.slice(Math.floor(array.length / 2), array.length);
+      // split the array in two - left and right
+      let left_arr = array.slice(0, Math.floor(array.length / 2));
+      let right_arr = array.slice(Math.floor(array.length / 2), array.length);
 
-    left_arr = MergeSort.sort(left_arr);
-    right_arr = MergeSort.sort(right_arr);
+      // recursively sort each one of the splited arrays
+      left_arr = sorting(left_arr);
+      right_arr = sorting(right_arr);
 
-    return MergeSort.merge(left_arr, right_arr);
+      // merge two arrays in one
+      return MergeSort.merge(left_arr, right_arr, view);
+    }(view.array)
   }
 }

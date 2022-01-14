@@ -129,9 +129,29 @@
       <br />
       <div class="flexbox sampleBars">
         <div id='selectionSort_canvas'></div>
-        <br /><br /><br />
+        <br />
         <div class='control_canvas'>
           <button onClick='SelectionSort.sort(selectionSort_array)'>Sort</button>
+        </div>
+      </div>
+      <br />
+      <h3>Merge Sort</h3>
+      <div class="textbox">
+        <p>
+          selection sort is an in-place comparison sorting algorithm. It has an O(n2) time complexity, which makes it
+          inefficient
+          on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its
+          simplicity
+          and has performance advantages over more complicated algorithms in certain situations, particularly where
+          auxiliary
+          memory is limited.
+        </p>
+      </div>
+      <br />
+      <div class="flexbox sampleBars">
+        <div id='mergeSort_canvas'></div>
+        <div class='control_canvas'>
+          <button onClick='MergeSort.sort(mergeSort_array, mergeSort_array.array)'>Sort</button>
         </div>
       </div>
     </div>
@@ -184,6 +204,9 @@
 
     let selectionSort_array = new ArrayView([...LIST], 500, document.getElementById("selectionSort_canvas"));
     selectionSort_array.render();
+
+    let mergeSort_array = new ArrayView([...LIST], 500, document.getElementById("mergeSort_canvas"));
+    mergeSort_array.render();
   </script>
 </body>
 
