@@ -8,10 +8,12 @@ class MergeSort {
       // verify what is the bigger element to sorting
       if (left_arr[0] > right_arr[0]) {
         // add element to merged_arr and remove from right_array
+        view.swap(view.array.indexOf(left_arr[0]), view.array.indexOf(right_arr[0]));
         merged_arr.push(right_arr.shift());
       }
       else {
         // add element to merged_arr and remove from left_array
+        view.swap(view.array.indexOf(right_arr[0]), view.array.indexOf(left_arr[0]));
         merged_arr.push(left_arr.shift());
       }
     }

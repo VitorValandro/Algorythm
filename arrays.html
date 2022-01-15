@@ -138,20 +138,21 @@
       <h3>Merge Sort</h3>
       <div class="textbox">
         <p>
-          selection sort is an in-place comparison sorting algorithm. It has an O(n2) time complexity, which makes it
-          inefficient
-          on large lists, and generally performs worse than the similar insertion sort. Selection sort is noted for its
-          simplicity
-          and has performance advantages over more complicated algorithms in certain situations, particularly where
-          auxiliary
-          memory is limited.
+          Merge Sort is a Divide and Conquer comparison-based algorithm. It divides the input array into two halves,
+          calls itself for the two halves, and then merges the two sorted halves. Every recursive algorithm is dependent
+          on a
+          base case and the ability to combine the results from base cases. Merge sort
+          is no different. The most important part of the merge sort algorithm is merge step. The merge step is the
+          solution
+          to the simple problem of merging two sorted lists(arrays) to build one large sorted
+          list(array).
         </p>
       </div>
       <br />
       <div class="flexbox sampleBars">
         <div id='mergeSort_canvas'></div>
         <div class='control_canvas'>
-          <button onClick='MergeSort.sort(mergeSort_array, mergeSort_array.array)'>Sort</button>
+          <button onClick='MergeSort.sort(mergeSort_array)'>Sort</button>
         </div>
       </div>
     </div>
