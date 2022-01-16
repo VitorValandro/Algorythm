@@ -8,23 +8,23 @@ class MergeSort {
       // verify what is the bigger element to sorting
       if (left_arr[0] > right_arr[0]) {
         // add element to merged_arr and remove from right_array
-        view.swap(view.array.indexOf(left_arr[0]), view.array.indexOf(right_arr[0]));
-        merged_arr.push(right_arr.shift());
+        view.swap(view.array._indexOf(left_arr[0]), view.array._indexOf(right_arr[0]));
+        merged_arr.push(right_arr._shift());
       }
       else {
         // add element to merged_arr and remove from left_array
-        view.swap(view.array.indexOf(right_arr[0]), view.array.indexOf(left_arr[0]));
-        merged_arr.push(left_arr.shift());
+        view.swap(view.array._indexOf(right_arr[0]), view.array._indexOf(left_arr[0]));
+        merged_arr.push(left_arr._shift());
       }
     }
 
     // iterates over the elements that doesn't were compared and just add them to merged_arr
     while (left_arr.length > 0) {
-      merged_arr.push(left_arr.shift());
+      merged_arr.push(left_arr._shift());
     }
 
     while (right_arr.length > 0) {
-      merged_arr.push(right_arr.shift());
+      merged_arr.push(right_arr._shift());
     }
 
     // return a single and sorted array
@@ -38,8 +38,8 @@ class MergeSort {
         return array;
 
       // split the array in two - left and right
-      let left_arr = array.slice(0, Math.floor(array.length / 2));
-      let right_arr = array.slice(Math.floor(array.length / 2), array.length);
+      let left_arr = array._slice(0, Math.floor(array.length / 2));
+      let right_arr = array._slice(Math.floor(array.length / 2), array.length);
 
       // recursively sort each one of the splited arrays
       left_arr = sorting(left_arr);

@@ -16,7 +16,7 @@ class RecursiveBacktrack {
 
     while (directions.length > 0) {
       // get the last item of the shuffled list and remove it
-      let currentDirection = directions.pop();
+      let currentDirection = directions._pop();
 
       // calculate the new node's coordinates [i, j] using our random direction
       // multiply by 2 because we want jump 1 node and get the next one

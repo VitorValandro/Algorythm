@@ -59,7 +59,7 @@ class aStar {
     const targetNode = new MazeNode(maze.target);
 
     // populate openList with start point
-    openList.push(sourceNode);
+    openList._push(sourceNode);
 
     // algorithm loop
     while (openList.length > 0) {
@@ -79,7 +79,7 @@ class aStar {
       let currentNode = openList[openList.length - 1];
 
       // add current node to closed list and remove from open list
-      closedList.push(openList.pop());
+      closedList._push(openList._pop());
 
       await sleep(100); // wait 100ms to display node in screen
       closedList.forEach(node => {
@@ -94,7 +94,7 @@ class aStar {
         let path = [];
         let current = currentNode;
         while (current) {
-          path.push(current.index); // save the path indexes in path array
+          path._push(current.index); // save the path indexes in path array
           current = current.parent; // iterate over nodes by parent pointer
         }
         path.forEach(index => maze.matrix[index[0]][index[1]] = 'R');
@@ -106,7 +106,7 @@ class aStar {
         .getNeighbors(maze, currentNode.index) // returns a list with indexes of adjacent nodes
         .forEach((neighborNodeIndex) => {
           // if not in closed list
-          if (!closedList.indexOf(neighborNodeIndex) >= 0) {
+          if (!closedList._indexOf(neighborNodeIndex) >= 0) {
             // create a new node for each neighbor
             let neighborNode = new MazeNode(neighborNodeIndex, currentNode);
 
@@ -116,7 +116,7 @@ class aStar {
             neighborNode.F = neighborNode.G + neighborNode.H;
 
             // check if node already is in open list
-            const nodeAlreadyInList = openList.indexOf(neighborNodeIndex);
+            const nodeAlreadyInList = openList._indexOf(neighborNodeIndex);
             if (nodeAlreadyInList >= 0) {
               // check if the G cost is lesser going by this path
               if (openList[nodeAlreadyInList].G > neighborNode.G)
@@ -124,7 +124,7 @@ class aStar {
                 openList[nodeAlreadyInList] = neighborNode;
             } else {
               // add it to open list
-              openList.push(neighborNode);
+              openList._push(neighborNode);
             }
           }
         })
