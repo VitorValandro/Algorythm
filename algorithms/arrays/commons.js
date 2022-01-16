@@ -10,4 +10,20 @@ Array.prototype._unshift = function (element) {
     this[i] = this[i - 1];
   }
   this[0] = element;
+  return this;
+}
+
+Array.prototype._shift = function () {
+  // the Array._shift() method implementation
+  for (let i = 0; i < this.length; i++) {
+    this[i] = this[i + 1];
+  }
+  this.length--;
+  return this;
+}
+
+Array.prototype._pop = function () {
+  // the Array.pop() method implementation
+  this.length--;
+  return this;
 }
