@@ -1,6 +1,8 @@
 Array.prototype._push = function (element) {
   // the Array.push() method implementation
-  this[this.length] = element;
+  for (let i = 0; i < arguments.length; i++) {
+    this[this.length] = arguments[i];
+  }
   return this;
 }
 
