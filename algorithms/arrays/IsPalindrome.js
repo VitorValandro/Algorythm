@@ -1,4 +1,5 @@
 function IsPalindrome(string) {
+  string = string.toLowerCase().split(' ').join('');
   const stack = new Stack();
   let reversedString = '';
   for (let i = 0; i < string.length; i++) {
