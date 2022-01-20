@@ -1,3 +1,19 @@
+/*
+* Linked Lists are dynamics arrays.
+* In javascript we can't tell the difference clearly, but the definition of Array data structure
+* says that an array is a collection of one single type of value and with limited and defined size.
+*
+* So, in Linked Lists we can have various different data types, and there is not a limited number
+* of elements in collections. We can also insert or remove items in any index of the list.
+*
+* This gives a lot more freedom to work with, but it is also more costly than Queue, Stacks or Arrays
+* in terms of complexity.
+*
+* While in an array we have all elements in a sequence in the computer memory, in Linked Lists we
+* have items of the list in various places, and each element saves a pointer that leads to the next
+* object in the next index.
+*/
+
 class Node {
   constructor(element) {
     this.element = element;
@@ -136,6 +152,12 @@ class LinkedList {
   size() {
     // returns the amount of elements in the list
     return this.count;
+  }
+
+  clear() {
+    // resets the list
+    this.head = undefined;
+    this.count = 0;
   }
 
   toString() {
