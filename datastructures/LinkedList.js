@@ -1,7 +1,7 @@
 class Node {
   constructor(element) {
     this.element = element;
-    this.pointer = undefined;
+    this.next = undefined;
   }
 }
 
@@ -27,12 +27,12 @@ class LinkedList {
     else {
       // start the iteration from the first element
       let current = this._head;
-      while (current.pointer != null) {
+      while (current.next != null) {
         // get every element after head until reach the last one
-        current = current.pointer;
+        current = current.next;
       }
       // link the current last element to the new pushed element
-      current.pointer = node;
+      current.next = node;
     }
 
     this.count++;
@@ -46,19 +46,19 @@ class LinkedList {
       // check if the specified index is the first one
       if (index === 0) {
         // make the new node the head of the list
-        node.pointer = this._head;
+        node.next = this._head;
         this._head = node;
       }
 
       else {
         // get the element in the previous index and in the current index
         const previous = this.getElementAt(index - 1);
-        const current = previous.pointer;
+        const current = previous.next;
 
         // link the new node to the current element in the specified index
-        node.pointer = current;
+        node.next = current;
         // link the previous node to the new one
-        previous.pointer = node;
+        previous.next = node;
       }
       this.count++; // update the size of list
       return true;
@@ -75,7 +75,7 @@ class LinkedList {
 
       // iterate over linked nodes until reach the specified index
       for (let i = 0; i < index && current != null; i++) {
-        current = current.pointer;
+        current = current.next;
       }
       return current;
     }
@@ -98,7 +98,7 @@ class LinkedList {
         // if found, return the index
         return i;
       }
-      current = current.pointer;
+      current = current.next;
     }
     return -1; // if the element wasn't found, return -1
   }
@@ -109,16 +109,16 @@ class LinkedList {
       let current = this._head;
       // check if we want remove the first element
       if (index === 0) {
-        this._head = current.pointer;
+        this._head = current.next;
       }
 
       else {
         const previous = this.getElementAt(index - 1);
-        current = previous.pointer;
+        current = previous.next;
 
         // jumps the current node by linking the previous node with the next node
         // without a reference pointint to it, the current node is deleted
-        previous.pointer = current.pointer;
+        previous.next = current.next;
       }
 
       this.count--;
@@ -140,15 +140,15 @@ class LinkedList {
 
   toString() {
     // returns a string representation of the list
-    if (this.head == null) {
+    if (this._head == null) {
       return '';
     }
 
-    let string = `${this.head.element}`;
-    let current = this.head.pointer;
+    let string = `${this._head.element}`;
+    let current = this._head.next;
     for (let i = 0; i < this.size() && current != null; i++) {
       string = `${string},${current.element}`;
-      current = current.pointer;
+      current = current.next;
     }
 
     return string;
