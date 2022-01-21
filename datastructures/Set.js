@@ -93,4 +93,17 @@ class Set {
 
     return intersectionSet;
   }
+
+  difference(otherSet) {
+    // Difference operation with sets.
+    // Given two sets A and B, the difference is a set with elements of A that isn't in B.
+    const differenceSet = new Set();
+    const values = this.values();
+    for (let i = 0; i < values.length; i++) {
+      if (!otherSet.has(values[i])) {
+        differenceSet.add(values[i])
+      }
+    }
+    return differenceSet;
+  }
 }
