@@ -68,4 +68,29 @@ class Set {
 
     return unionSet;
   }
+
+  intersection(otherSet) {
+    // Intersection operation with sets.
+    // Given two sets A and B, the intersection is a set with elements in common between A and B.
+    const intersectionSet = new Set();
+    const values = this.values();
+    const otherValues = otherSet.values();
+
+    let smallerSet = values;
+    let biggerSet = otherValues;
+
+    if (otherValues.length - values.length > 0) {
+      biggerSet = otherValues;
+      smallerSet = values;
+    }
+
+    // iterate over the smaller set to get the lower n for O(n)
+    smallerSet.forEach(item => {
+      if (biggerSet.includes(item)) {
+        intersectionSet.add(item);
+      }
+    });
+
+    return intersectionSet;
+  }
 }
