@@ -1,6 +1,16 @@
 /*
 * The Set data structure follow the rules of a mathematical set.
 * A set is a sequencial and sorted collection with no repeated elements.
+*
+* The javascript ES2015 already have a built-in set data structure, but it
+* don't have the mathematical operations of sets, like Union, Intersection and Difference.
+* However, we can easily implement it using other array functions of ES6 and the spread operator:
+*
+* Union           ->    new Set([...setA, ...setB]);
+* Intersection    ->    new Set([...setA].filter(x => setB.has(x)))
+* Difference      ->    new Set([...setA].filter(x => !setB.has(x)))
+*
+* Here, for learning purpose, I will implement all of this methods and operations of sets from scratch.
 */
 
 class Set {
@@ -105,5 +115,22 @@ class Set {
       }
     }
     return differenceSet;
+  }
+
+  isSubsetOf(otherSet) {
+    // Returns if this set is a subset of other set (boolean).
+    // A set is a subset of other set if all elements in A are present in B.
+
+    // if the size of this set is bigger than the other, it isn't a subset
+    if (this.size() > otherSet.size()) {
+      return false;
+    }
+
+    for (let i = 0, values = this.values(); i < values.length; i++) {
+      if (!otherSet.has(values[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 }
