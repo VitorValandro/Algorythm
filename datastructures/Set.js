@@ -57,4 +57,15 @@ class Set {
     }
     return values;
   }
+
+  union(otherSet) {
+    // Union operation with sets. 
+    // Given two sets A and B, the union is a set with all elements of A and B.
+    const unionSet = new Set(); // start a new set
+
+    this.values().forEach(item => unionSet.add(item)); // add to new set all elements of A
+    otherSet.values().forEach(item => unionSet.add(item)); // add to new set all elements of B
+
+    return unionSet;
+  }
 }
