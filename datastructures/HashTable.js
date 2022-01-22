@@ -1,3 +1,16 @@
+/*
+* It's like a Dictionary, but instead store the pair (key, value), the key is a hash
+* and it store only the value.
+*
+* Implements an associative array abstract data type, a structure that can map keys to values. 
+* A hash table uses a hash function to compute an index, also called a hash code, into an array 
+* of slots, from which the desired value can be found. During lookup, the key is hashed 
+* and the resulting hash indicates where the corresponding value is stored.
+*
+* This simple HashTable allows collision between keys with the same hash, so take a look into
+* Separate Chaining and Linear Probing to smarter models.
+*/
+
 class HashTable {
   constructor() {
     this.table = {};
@@ -64,5 +77,28 @@ class HashTable {
     return valuePair == null ? undefined : valuePair.value;
   }
 
+  isEmpty() {
+    return this.size() === 0;
+  }
 
+  size() {
+    return Object.keys(this.table).length;
+  }
+
+  clear() {
+    this.table = {};
+  }
+
+  toString() {
+    if (this.isEmpty()) {
+      return '';
+    }
+
+    const keys = Object.keys(this.table);
+    let string = `${keys[0]} => ${this.table[keys[0]].toString()}`;
+    for (let i = 0; i < keys.length; i++) {
+      string = `${string},{${keys[i]} => ${this.table[keys[i]].toString()}}`
+    }
+    return string;
+  }
 }
