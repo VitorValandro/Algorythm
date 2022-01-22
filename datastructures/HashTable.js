@@ -28,6 +28,21 @@ class HashTable {
     }
   }
 
+  djb2HashCode(key) {
+    // A more sophisticated hashing function to avoid key collisions
+    const tableKey = this.toStr(key);
+    let hash = 5381; // start hash with a high prime number
+
+    // iterates over the chars of key string
+    for (let i = 0; i < tableKey.length; i++) {
+      // multiply the hash by 33 (magic number) and sum it with the char ASCII code
+      hash = (hash * 33) + tableKey.charCodeAt(i);
+    }
+
+    // get the remain of a random prime number bigger than the length of the table (1000)
+    return hash % 1013;
+  }
+
   loseloseHashCode(key) {
     // Returns the sum of ASCII representations of key string
     // "John" -> 74 + 111 + 104 + 110 -> 399
