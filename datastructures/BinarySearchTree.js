@@ -1,3 +1,11 @@
+/*
+* A Binary Search Tree is a Tree data structure organized in node pairs.
+* It starts with a root (that has no parents) and then branches into left and right childs.
+* The left child is always smallest than the parent, and the right is always biggest.
+*
+* This data structure is always ordered and allows fast searching.
+*/
+
 class Node {
   constructor(key) {
     this.key = key; // node value
@@ -209,6 +217,56 @@ class BinarySearchTree {
   }
 
   remove(key) {
-    // removes the specified key from the tree
+    // Removes the specified key from the tree and return its value
+    this.root = this.removeNode(this.root, key);
+  }
+
+  removeNode(node, key) {
+    // node == null is the base case
+    if (node == null) {
+      return null;
+    }
+
+    // if key is lesser than the current node value
+    if (key < node.key) {
+      // iter over left child
+      node.left = this.removeNode(node.left, key);
+      return node;
+    }
+    // if key is bigger than the current node value
+    else if (key > node.key) {
+      // iter over the right child
+      node.right = this.removeNode(node.right, key);
+      return node;
+    }
+
+    else { // if key == current node value
+      // if node has no right or left child
+      if (node.left == null && node.right == null) {
+        // remove the node and nulls its references
+        node = null;
+        return node;
+      }
+      // the node has just a right child
+      if (node.left == null) {
+        // jump the current node and link its child with its parent
+        node = node.right;
+        return node;
+      }
+      // the node has just a left child
+      else if (node.right == null) {
+        // jump the current node and link its child with its parent
+        node = node.left;
+        return node;
+      }
+      // The final case, when the node has two childs
+      // get the min node of the right child subtree
+      const aux = this.minNode(node.right);
+      // replace the node key with the min right node value
+      node.key = aux.key;
+      // removes the min node of the right subtree
+      node.right = this.removeNode(node.right, aux.key);
+      return node;
+    }
   }
 }
