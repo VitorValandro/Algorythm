@@ -71,8 +71,39 @@ class BinarySearchTree {
     // searchs for the key in the tree. Return true if it exists and false if not (boolean)
   }
 
-  inOrderTraverse() {
-    // travel through all tree nodes using a in-order route
+  inOrderTraverse(callback) {
+    /* 
+    * Travel through all tree nodes using a in-order route.
+    * A in-order route is an ascending order path, where we travel from the smallest 
+    * to the biggest value.
+    */
+
+    // call the inOrderTraverseNode recursive method passing the root and a callback function.
+    this.inOrderTraverseNode(this.root, callback);
+  }
+
+  inOrderTraverseNode(node, callback) {
+    /*
+    * This is a recursive method to iter through all nodes in the three in an ascending order.
+    * It starts from the node specified in params, and execute the callback function over each 
+    * node visited.
+    * 
+    * An example of callback: 
+    * 
+    * printNode = (value) => console.log(value);
+    * 
+    * It will print all node values of the tree in ascending order.
+    */
+
+    // node == null is the base case
+    if (node != null) {
+      // first, iterates over all left nodes (from the smallest to the biggest)
+      this.inOrderTraverseNode(node.left, callback);
+      // call the callback for each node
+      callback(node.key);
+      // iterates over all right nodes (from the smallest to the biggest)
+      this.inOrderTraverseNode(node.right, callback);
+    }
   }
 
   preOrderTraverse() {
