@@ -10,13 +10,6 @@ class BinarySearchTree {
   constructor() {
     // store the root node
     this.root = null;
-    // function to compare the node values (in this case, numbers)
-    this.compare = (a, b) => {
-      if (a === b) {
-        return 0;
-      }
-      return a < b ? -1 : 1;
-    }
   }
 
   insert(key) {
@@ -42,7 +35,7 @@ class BinarySearchTree {
     */
 
     // check if it is lesser or bigger than the current node
-    if (this.compare(key, node.key) === -1) {
+    if (key < node.key) {
       // check if the node is empty
       if (node.left == null) {
         // if it is, place the key here
@@ -68,7 +61,31 @@ class BinarySearchTree {
   }
 
   search(key) {
-    // searchs for the key in the tree. Return true if it exists and false if not (boolean)
+    // Searchs for the key in the tree. Return true if it exists and false if not (boolean)
+    return this.searchNode(this.root, key);
+  }
+
+  searchNode(node, key) {
+    // This is a recursive function to search for a specified value in the tree.
+
+    // node == null is the base case
+    if (node == null) {
+      return false;
+    }
+    // if the searching value is lesser than the current node value
+    if (key < node.key) {
+      // search in the left nodes
+      return this.searchNode(node.left, key);
+    }
+    // if the searching value is bigger than the current node value
+    else if (key > node.key) {
+      // search in the right nodes
+      return this.searchNode(node.right, key);
+    }
+    // if isn't lesser nor bigger, it is equals -> found the key
+    else {
+      return true;
+    }
   }
 
   inOrderTraverse(callback) {
