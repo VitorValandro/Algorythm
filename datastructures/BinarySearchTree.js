@@ -106,12 +106,49 @@ class BinarySearchTree {
     }
   }
 
-  preOrderTraverse() {
-    // travel through all tree nodes using a pre-order route
+  preOrderTraverse(callback) {
+    /*
+    * Travel through all tree nodes using a pre-order route.
+    * A pre-order route is almost the same of the in-order route (ascending path), but here
+    * the root will always be the first visited.
+    */
+
+    // calls the preOrderTraverseNode recursive method passing the root and a callback function
+    this.preOrderTraverseNode(this.root, callback);
+  }
+
+  preOrderTraverseNode(node, callback) {
+    // node == null is the base case
+    if (node != null) {
+      // first it execute the callback function in the root node
+      callback(node.key);
+      // then it iter over all left child nodes
+      this.preOrderTraverseNode(node.left, callback);
+      // then it iter over all right child nodes
+      this.preOrderTraverseNode(node.right, callback);
+    }
   }
 
   postOrderTraverse() {
-    // travel through all tree nodes using a post-order route
+    /* 
+    * Travel through all tree nodes using a post-order route. 
+    * A post-order route is a path that start from the childs, and then go to the root.
+    */
+
+    // calls the postOrderTraverseNode recursive method passing the root and a callback function
+    this.postOrderTraverseNode(this.root, callback)
+  }
+
+  postOrderTraverseNode(node, callback) {
+    // node == null is the base case
+    if (node != null) {
+      // first it iter over all left child nodes
+      this.postOrderTraverseNode(node.left, callback);
+      // then it iter over all right child nodes
+      this.postOrderTraverseNode(node.right, callback);
+      // finally, it executes the callback in the root node
+      callback(node.key);
+    }
   }
 
   min() {
