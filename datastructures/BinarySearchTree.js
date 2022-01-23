@@ -152,11 +152,43 @@ class BinarySearchTree {
   }
 
   min() {
-    // returns the min key of the tree
+    /* 
+    * Search for and returns the min (smallest) key of the tree.
+    * Calls the minNode method from the root, to get the min key of complete tree.
+    * An other "private" method minNode is used.
+    */
+
+    return this.minNode(this.root);
+  }
+
+  minNode(node) {
+    // The min key of a tree is always the last node in the left of the tree.
+
+    let current = node;
+    // iterate over the most left nodes until reach the last one
+    while (current != null && current.left != null) {
+      current = current.left;
+    }
+    // return the most left node
+    return current;
   }
 
   max() {
-    // returns the max key of the tree
+    // Search for and returns the max (biggest) key of the tree.
+
+    return this.maxNode(this.root);
+  }
+
+  maxNode(node) {
+    // The max key of a tree is always the last node in the right of the tree.
+
+    let current = node;
+    // iterate over the most right nodes until reach the last one
+    while (current != null && current.right != null) {
+      current = current.right;
+    }
+    // return the most right node
+    return current;
   }
 
   remove(key) {
