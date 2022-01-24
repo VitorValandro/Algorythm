@@ -7,15 +7,16 @@
 *      and in the last level all childs are at left. This is called shape property.
 *   2. A binary heap is a min heap or a max heap. This is called heap property.
 *
-* In this case, we have a min heap, so all parent nodes are smaller than or equal to their child nodes and
-* we can quickly extract the min value of the tree.
+* Unlike we did in BST and AVL tree, here in heap we will use arrays indexes (and not pointers 
+* in objects) to represent our tree. This will change the logic and introduce a new example
+* of tree data structure representation.
 */
 
 class MinHeap {
   /*
-  * Unlike we did in BST and AVL tree, here in heap we will use arrays indexes (and not pointers 
-  * in objects) to represent our tree. This will change the logic and introduce a new example
-  * of tree data structure representation.
+  * In this case, we have a min heap, so all parent nodes are smaller than or equal to their child nodes and
+  * we can quickly extract the min value of the tree.
+  * The root value of the tree is always the min heap.
   */
   constructor() {
     this.heap = [];
@@ -51,7 +52,7 @@ class MinHeap {
     if (value != null) {
       // inserts the value in the end of tree
       this.heap._push(value);
-      // sift up the value from the end of the array until parent < value
+      // sift up the value from the end of the array until parent < value (min) or parent > value (max)
       this.siftUp(this.heap.length - 1);
       return true;
     }
@@ -61,7 +62,8 @@ class MinHeap {
   siftUp(index) {
     /* 
     * Method to help insertion of new elements in the tree.
-    * It works swapping the new value with its parent until parent < new value.
+    * It works swapping the new value with its parent until parent < new value (for
+    * min heap) or parent > new value (for max heap).
     * This maintains the tree correctly ordered.
     * Also known as up head, percolate up, bubble up, heapify up and cascade up.
     */
@@ -76,7 +78,7 @@ class MinHeap {
   }
 
   extract(value) {
-    // removes and returns the min value (min heap) of the tree
+    // removes and returns the min or max heap of the tree
     if (this.isEmpty()) {
       return undefined;
     }
@@ -96,7 +98,8 @@ class MinHeap {
     /*
     * Method to help removal of elements in the tree.
     * It works reordering the tree after the element be removed.
-    * The operation is swap the removed element with its smaller child until it gets to correct position.
+    * The operation is swap the removed element with its smaller (min heap) or its bigger 
+    * (max heap) child until it gets to correct position.
     * Also known as sink down, percolate down, bubble down, heapify down and cascade down
     */
 
@@ -129,9 +132,31 @@ class MinHeap {
   }
 
   findMinimum() {
-    // returns the min value (min heap) of the tree without removing it
+    // returns the min value (min heap) or the max value (max heap) of the tree without removing it
 
-    // once the min heap is always the root, the min is in first index
+    // once the min heap is always the root, the min or max is in first index
     return this.isEmpty() ? undefined : this.heap[0];
+  }
+}
+
+class MaxHeap extends MinHeap {
+  /*
+  * In this case, we have a max heap, so all parent nodes are bigger than or equal to their child nodes and
+  * we can quickly extract the max value of the tree.
+  * The root value of the tree is always the max heap.
+  * 
+  * This is essentialy the exactly same implementation of MinHeap, but here the value comparison is 
+  * for the bigger, not for the smaller.
+  */
+
+  constructor() {
+    super();
+    // change the compare function from `a < b` to `a > b`
+    this.compare = (a, b) => {
+      if (a === b) {
+        return Compare.EQUALS;
+      }
+      return a > b ? -1 : 1;
+    }
   }
 }
