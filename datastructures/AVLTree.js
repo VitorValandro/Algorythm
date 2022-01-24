@@ -114,4 +114,91 @@ class AVLTree extends BinarySearchTree {
     // Now it's a simple case, just make a left rotation from the root node to balance the tree
     return this.rotationRR(node);
   }
+
+  insert(key) {
+    this.root = this.insertNode(this.root, key);
+  }
+
+  insertNode(node, key) {
+    // This insertion step is like BST's insertion.
+    if (node == null) {
+      return new Node(key);
+    }
+    else if (key < node.key) {
+      node.left = this.insertNode(node.left, key);
+    }
+    else if (key > node.key) {
+      node.right = this.insertNode(node.right, key);
+    }
+    else {
+      return node;
+    }
+
+    // After insertion, balance the tree if necessary
+    const balanceFactor = this.getBalanceFactor(node);
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      if (key < node.left.key) {
+        node = this.rotationLL(node);
+      }
+      else {
+        return this.rotationLR(node);
+      }
+    }
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      if (key > node.right.key) {
+        node = this.rotationRR(node);
+      }
+      else {
+        return this.rotationRL(node);
+      }
+    }
+    return node;
+  }
+
+  removeNode(node, key) {
+    // Calls the BST remove method to remove the node
+    node = super.removeNode(node, key);
+
+    // If the return is null, no need for balance
+    if (node == null) {
+      return node;
+    }
+
+    // After removing, balance the tree if necessary
+    const balanceFactor = this.getBalanceFactor(node);
+
+    // The tree is unbalanced to the left
+    if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
+      const balanceFactorLeft = this.getBalanceFactor(node.left);
+      // Check if it needs a simple rotation
+      if (
+        balanceFactorLeft === BalanceFactor.BALANCED ||
+        balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
+      ) {
+        return this.rotationLL(node);
+      }
+      // Or if it needs a double rotation
+      if (balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
+        return this.rotationLR(node.left)
+      }
+    }
+
+    // The tree is unbalanced to the right
+    if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
+      const balanceFactorRight = this.getBalanceFactor(node.right);
+      // Check if it needs a simple rotation
+      if (
+        balanceFactorRight === BalanceFactor.BALANCED ||
+        balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
+      ) {
+        return this.rotationRR(node);
+      }
+      // Or if it needs a double rotation
+      if (balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
+        return this.rotationRL(node.right);
+      }
+    }
+
+    return node;
+  }
 }
