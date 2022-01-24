@@ -45,6 +45,12 @@ function randomChoice(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+function swap(array, a, b) {
+  const tmp = array[a];
+  array[a] = array[b];
+  array[b] = tmp;
+}
+
 function removeItem(array, item) {
   let index = array.indexOf(item);
   if (index !== -1) {
