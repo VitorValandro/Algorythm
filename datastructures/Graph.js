@@ -72,5 +72,18 @@ class Graph {
     }
     return s;
   }
+}
 
+const Status = {
+  UNEXPLORED: 0,
+  VISITED: 1,
+  EXPLORED: 2
+}
+
+const initializeStatus = vertices => {
+  const status = {};
+  for (let i = 0; i < vertices.length; i++) {
+    status[vertices[i]] = Status.UNEXPLORED;
+  }
+  return status;
 }
