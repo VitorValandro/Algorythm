@@ -18,7 +18,7 @@
 * E.g. -> const printVertex = (value) => console.log(value); -> will print all values of the graph
 */
 
-function BFS(graph, startVertex, callback) {
+function BreadthFirstIteration(graph, startVertex, callback) {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const status = initializeStatus(vertices);
@@ -48,5 +48,57 @@ function BFS(graph, startVertex, callback) {
     if (callback) {
       callback(u);
     }
+  }
+};
+
+/*
+* This is a improved version of Breadth First Search. While the algorithm BFIteration above just
+* iterates over the Graph executing a callback, this algorithm saves the distances of vertices
+* from the startVertex and track the predecessor for every node, so we can get the shortest path from
+* startVertex to all other nodes.
+*/
+function BFS(graph, startVertex) {
+  const vertices = graph.getVertices();
+  const adjList = graph.getAdjList();
+  const status = initializeStatus(vertices);
+  const Q = new Queue(); // create the queue Q
+
+  const distances = {};
+  const predecessors = {};
+
+  // Populate distances and predecessors with start values
+  for (let i = 0; i < vertices.length; i++) {
+    distances[vertices[i]] = 0;
+    predecessors[vertices[i]] = null;
+  }
+
+  // Enqueue the start vertex
+  Q.enqueue(startVertex);
+  while (!Q.isEmpty()) {
+    // Dequeue u from Q
+    const u = Q.dequeue();
+    status[u] = Status.VISITED; // Set u as VISITED
+    // Get all neighbors of u
+    const neighbors = adjList.get(u);
+
+    for (let i = 0; i < neighbors.length; i++) {
+      // Enqueue all neighbors w that are UNEXPLORED 
+      const w = neighbors[i];
+      if (status[w] === Status.UNEXPLORED) {
+        status[w] = Status.VISITED;
+        distances[w] = distances[u] + 1;
+        predecessors[w] = u;
+        Q.enqueue(w);
+      }
+    }
+    // Set u as EXPLORED
+    status[u] = Status.EXPLORED;
+  }
+
+  // returns the distances from startVertex to other nodes and the track of predecessors
+  // with this values, we can easily get the shortest path from startVertex to each other node.
+  return {
+    distances,
+    predecessors
   }
 };
