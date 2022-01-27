@@ -12,7 +12,7 @@ class RecursiveBacktrack {
     maze.matrix[i][j] = 0;
 
     // shuffle directions list to get a random one
-    directions = shuffle(directions);
+    directions = FisherYates.shuffle(directions);
 
     while (directions.length > 0) {
       // get the last item of the shuffled list and remove it
