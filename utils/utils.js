@@ -59,6 +59,14 @@ function removeItem(array, item) {
   return array;
 }
 
+function lesserOrEquals(a, b) {
+  return a < b || a === b;
+}
+
+function biggerOrEquals(a, b) {
+  return a > b || a === b;
+}
+
 function sleep(ms) {
   return new Promise(
     resolve => setTimeout(resolve, ms)

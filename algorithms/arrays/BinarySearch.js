@@ -6,7 +6,7 @@ class BinarySearch {
     let low = 0; // define the low pointer as first index
     let high = sortedArray.length - 1; // define high pointer as last index
 
-    while (BinarySearch.lesserOrEquals(low, high)) {
+    while (lesserOrEquals(low, high)) {
       // get the middle index between the two pointers
       const mid = Math.floor((low + high) / 2);
       const element = sortedArray[mid]; // get the middle value
@@ -25,9 +25,5 @@ class BinarySearch {
     }
     // element doesn't exists in the list
     return undefined;
-  }
-
-  static lesserOrEquals(a, b) {
-    return a < b || a === b;
   }
 }
