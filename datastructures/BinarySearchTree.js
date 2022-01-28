@@ -4,6 +4,16 @@
 * The left child is always smallest than the parent, and the right is always biggest.
 *
 * This data structure is always ordered and allows fast searching.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(log(n))
+*     - Removal:    O(log(n))
+*     - Search:     O(log(n))
+*   Worst cases:
+*     - Insertion:  O(n)
+*     - Removal:    O(n)
+*     - Search:     O(n)
 */
 
 class Node {

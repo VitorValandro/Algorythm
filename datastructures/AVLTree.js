@@ -2,6 +2,16 @@
 * The Adelson-Velskii and Landi tree (AVL Tree) is an auto balanced tree.
 * It means that the tree always try to balance itself after a node be removed or inserted.
 * A balanced tree is a tree where the height of left or right subtrees differ at most in 1.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(log(n))
+*     - Removal:    O(log(n))
+*     - Search:     O(log(n))
+*   Worst cases:
+*     - Insertion:  O(log(n))
+*     - Removal:    O(log(n))
+*     - Search:     O(log(n))
 */
 
 class AVLTree extends BinarySearchTree {

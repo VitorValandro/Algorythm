@@ -6,6 +6,16 @@
 *
 * So, with we have Alice (key = 5) and Bob (key = 5), instead of Bob overwritte Alice, we will have
 * Alice stored in position 5 (hash[5] = Alice) and Bob stored in position 5 + 1 (hash[6] = Bob).
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(1)
+*   Worst cases:
+*     - Insertion:  O(n)
+*     - Removal:    O(n)
+*     - Search:     O(n)
 */
 
 class HashTableLinearProbing extends HashTable {

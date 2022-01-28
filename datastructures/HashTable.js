@@ -9,6 +9,16 @@
 *
 * This simple HashTable allows collision between keys with the same hash, so take a look into
 * Separate Chaining and Linear Probing to smarter models.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(1)
+*   Worst cases:
+*     - Insertion:  O(n)
+*     - Removal:    O(n)
+*     - Search:     O(n)
 */
 
 class HashTable {

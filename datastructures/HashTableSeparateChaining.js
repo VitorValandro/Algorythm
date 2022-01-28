@@ -4,6 +4,16 @@
 * Separate Chaining we create a Linked List for each hashed key and store the pair (key, value)
 * in it. So, if we have more than one pair with the same hashed key, we can differ among them inside
 * the Linked List.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(1)
+*   Worst cases:
+*     - Insertion:  O(n)
+*     - Removal:    O(n)
+*     - Search:     O(n)
 */
 
 class HashTableSeparateChaining extends HashTable {

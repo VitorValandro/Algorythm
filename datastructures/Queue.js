@@ -2,6 +2,16 @@
 * The queue datastructure.
 * Queues are arrays that follow the FIFO (First In First Out) rule.
 * Here we use javascript objects in place of arrays, to have O(1) instead O(n) complexity.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
+*   Worst cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
 */
 
 class Queue {

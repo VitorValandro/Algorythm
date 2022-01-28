@@ -2,6 +2,16 @@
 * The stack data structure. 
 * Stacks are arrays that follow the LIFO (Last In First Out) rule.
 * Here we use javascript objects in place of arrays, to have O(1) instead O(n) complexity
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
+*   Worst cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
 */
 
 class Stack {

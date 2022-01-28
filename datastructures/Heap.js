@@ -10,6 +10,16 @@
 * Unlike we did in BST and AVL tree, here in heap we will use arrays indexes (and not pointers 
 * in objects) to represent our tree. This will change the logic and introduce a new example
 * of tree data structure representation.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(log(n))
+*     - Removal:    O(log(n))
+*     - Search:     O(1)
+*   Worst cases:
+*     - Insertion:  O(log(n))
+*     - Removal:    O(log(n))
+*     - Search:     O(1)
 */
 
 class MinHeap {

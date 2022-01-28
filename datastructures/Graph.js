@@ -6,6 +6,22 @@
 * Here in this implementation, we will represent a Graph using an adjascent list.
 * Our adjascent list will be a dictionary, where the key is the vertex and the value
 * is an array with all adjascent vertices connected to it. 
+*
+* Time complexity:
+*   Adjacency list:
+*     - Size of tree: O(V + E)
+*     - Vertex insertion: O(1)
+*     - Edge insertion: O(1)
+*     - Vertex removal: O(V + E)
+*     - Edge removal: O(E)
+*     - Get (query): O(V)
+*   Adjacency matrix:
+*     - Size of tree: O(2V)
+*     - Vertex insertion: O(V²)
+*     - Edge insertion: O(1)
+*     - Vertex removal: O(V²)
+*     - Edge removal: O(1)
+*     - Get (query): O(1)
 */
 
 class Graph {

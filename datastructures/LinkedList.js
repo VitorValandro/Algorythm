@@ -12,6 +12,16 @@
 * While in an array we have all elements in a sequence in the computer memory, in Linked Lists we
 * have items of the list in various places, and each element saves a pointer that leads to the next
 * object in the next index.
+*
+* Time complexity:
+*   Average cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
+*   Worst cases:
+*     - Insertion:  O(1)
+*     - Removal:    O(1)
+*     - Search:     O(n)
 */
 
 class Node {
