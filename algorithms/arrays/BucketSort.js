@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n+k)
+*   - Average cases: O(n+k)
+*   - Worst cases: O(n²)
+*/
+
 class BucketSort {
   static sort(array, bucketSize = 5) {
     if (array.length < 2) {

@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n+k)
+*   - Average cases: O(n+k)
+*   - Worst cases: O(n+k)
+*/
+
 class CountingSort {
   static sort(array) {
     if (array.length < 2) {

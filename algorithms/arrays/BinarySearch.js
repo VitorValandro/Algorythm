@@ -1,3 +1,7 @@
+/*
+* Time complexity (in sorted Arrays): O(log(n))
+*/
+
 class BinarySearch {
   static search(array, value) {
     // first, sort the array with ascending values

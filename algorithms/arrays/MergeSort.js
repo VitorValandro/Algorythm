@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n log(n))
+*   - Average cases: O(n log(n))
+*   - Worst cases: O(n log(n))
+*/
+
 class MergeSort {
   static merge(left_arr, right_arr, view) {
     // initialize the array that the two lists will merge into

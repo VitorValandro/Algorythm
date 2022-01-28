@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n²)
+*   - Average cases: O(n²)
+*   - Worst cases: O(n²)
+*/
+
 class SelectionSort {
   static async sort(view) {
     let min; // minimum index

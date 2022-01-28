@@ -62,6 +62,9 @@ function DFSIterationVisit(u, status, adjList, callback) {
 *
 * Another practical example for this implementation is the topological sort (TopSort) in Directed
 * Acyclic Graphs (DAGs).
+*
+*
+* Time complexity : O(V + E)
 */
 
 function DFS(graph) {

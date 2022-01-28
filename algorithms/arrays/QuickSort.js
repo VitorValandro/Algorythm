@@ -4,6 +4,11 @@
 * in the left [0] and other in the right [array.length -1]. Then, we move the left pointer until find
 * a value that is bigger than the pivot; we also move the right pointer until find a value that is
 * smaller than the pivot. Then we swap this two values and repeat the process.
+*
+* Time complexity:
+*   - Best cases: O(n log(n))
+*   - Average cases: O(n log(n))
+*   - Worst cases: O(n²)
 */
 
 class QuickSort {

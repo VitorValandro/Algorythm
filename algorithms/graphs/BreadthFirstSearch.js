@@ -16,6 +16,8 @@
 * for each element of the graph.
 *
 * E.g. -> const printVertex = (value) => console.log(value); -> will print all values of the graph
+*
+* Time complexity : O(V + E)
 */
 
 function BreadthFirstIteration(graph, startVertex, callback) {

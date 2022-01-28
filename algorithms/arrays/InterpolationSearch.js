@@ -1,3 +1,7 @@
+/*
+* Time complexity (in sorted Arrays): O(n)
+*/
+
 class InterpolationSearch {
   // search for `value` in an `array`
   static search(array, value) {

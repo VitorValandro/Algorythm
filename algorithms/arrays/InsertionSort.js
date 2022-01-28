@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n)
+*   - Average cases: O(n²)
+*   - Worst cases: O(n²)
+*/
+
 class InsertionSort {
   static async sort(view) {
     // start key as the second element (i=1)

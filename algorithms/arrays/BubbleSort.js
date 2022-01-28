@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n)
+*   - Average cases: O(n²)
+*   - Worst cases: O(n²)
+*/
+
 class BubbleSort {
   static async sort(view) {
     let swapped;

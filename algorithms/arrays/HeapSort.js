@@ -1,3 +1,10 @@
+/*
+* Time complexity:
+*   - Best cases: O(n log(n))
+*   - Average cases: O(n log(n))
+*   - Worst cases: O(n log(n))
+*/
+
 class HeapSort {
   static sort(array) {
     let heapSize = array.length;
