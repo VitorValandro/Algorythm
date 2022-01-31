@@ -4,7 +4,7 @@ export function loadImages(element: HTMLElement, path: string, images: string[])
     img.src = path + image;
     element.appendChild(img);
   })
-};
+}
 
 export function isArrayEquals(arr1: [], arr2: []) {
   // it works only in 1d arrays without nested arrays
@@ -26,14 +26,14 @@ export function randomChoice(array: []) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-export function swap(array: any[], a: number, b: number) {
+export function swap<T>(array: T[], a: number, b: number) {
   const tmp = array[a];
   array[a] = array[b];
   array[b] = tmp;
 }
 
 export function removeItem(array: [], item: never) {
-  let index = array.indexOf(item);
+  const index = array.indexOf(item);
   if (index !== -1) {
     array.splice(index, 1);
   }

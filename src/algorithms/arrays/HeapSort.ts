@@ -5,8 +5,10 @@
 *   - Worst cases: O(n log(n))
 */
 
-class HeapSort {
-  static sort(array) {
+import { swap } from '../../utils/utils';
+
+export class HeapSort {
+  static sort(array: number[]) {
     let heapSize = array.length;
 
     // creates a max heap with the original array
@@ -23,7 +25,7 @@ class HeapSort {
     return array;
   }
 
-  static buildMaxHeap(array) {
+  static buildMaxHeap(array: number[]) {
     // Method to turn the original array into a Heap tree
     for (let i = Math.floor(array.length / 2); i >= 0; i -= 1) {
       HeapSort.heapify(array, i, array.length);
@@ -31,7 +33,7 @@ class HeapSort {
     return array;
   }
 
-  static heapify(array, index, heapSize) {
+  static heapify(array: number[], index: number, heapSize: number) {
     // method identical to Heap's sift down, to reorder the heap tree
     let largest = index;
 

@@ -5,8 +5,8 @@
 *   - Worst cases: O(n+k)
 */
 
-class CountingSort {
-  static sort(array) {
+export class CountingSort {
+  static sort(array: number[]) {
     if (array.length < 2) {
       return array;
     }
@@ -40,7 +40,7 @@ class CountingSort {
     return array;
   }
 
-  static findMaxValue(array) {
+  static findMaxValue(array: number[]) {
     let max = array[0];
     for (let i = 1; i < array.length; i++) {
       if (array[i] > max) {

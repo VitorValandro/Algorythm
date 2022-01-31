@@ -5,8 +5,10 @@
 *   - Worst cases: O(n²)
 */
 
-class BucketSort {
-  static sort(array, bucketSize = 5) {
+import { QuickSort } from "./QuickSort";
+
+export class BucketSort {
+  static sort(array: number[], bucketSize = 5) {
     if (array.length < 2) {
       return array;
     }
@@ -14,7 +16,7 @@ class BucketSort {
     return BucketSort.sortBuckets(buckets);
   }
 
-  static createBuckets(array, bucketSize) {
+  static createBuckets(array: number[], bucketSize: number): number[][] {
     let minValue = array[0];
     let maxValue = array[0];
 
@@ -28,23 +30,25 @@ class BucketSort {
     }
 
     const bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
-    const buckets = [];
+    const buckets: number[][] = [];
+
     for (let i = 0; i < bucketCount; i++) {
       buckets[i] = [];
     }
+
     for (let i = 0; i < array.length; i++) {
       const bucketIndex = Math.floor((array[i] - minValue) / bucketSize);
-      buckets[bucketIndex]._push(array[i]);
+      buckets[bucketIndex].push(array[i]);
     }
     return buckets;
   }
 
-  static sortBuckets(buckets) {
-    const sortedArray = [];
+  static sortBuckets(buckets: number[][]) {
+    const sortedArray: number[] = [];
     for (let i = 0; i < buckets.length; i++) {
       if (buckets[i] != null) {
         QuickSort.sort(buckets[i]);
-        sortedArray._push(...buckets[i]);
+        sortedArray.push(...buckets[i]);
       }
     }
     return sortedArray;
