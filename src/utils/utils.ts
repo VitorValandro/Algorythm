@@ -1,4 +1,4 @@
-function loadImages(element, path, images) {
+export function loadImages(element: HTMLElement, path: string, images: string[]) {
   images.forEach(image => {
     const img = document.createElement("img");
     img.src = path + image;
@@ -6,7 +6,7 @@ function loadImages(element, path, images) {
   })
 };
 
-function isArrayEquals(arr1, arr2) {
+export function isArrayEquals(arr1: [], arr2: []) {
   // it works only in 1d arrays without nested arrays
   if (!arr1 || !arr2)
     return false;
@@ -21,18 +21,18 @@ function isArrayEquals(arr1, arr2) {
   return true;
 }
 
-function randomChoice(array) {
+export function randomChoice(array: []) {
   // allows to get one random element in a list
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function swap(array, a, b) {
+export function swap(array: any[], a: number, b: number) {
   const tmp = array[a];
   array[a] = array[b];
   array[b] = tmp;
 }
 
-function removeItem(array, item) {
+export function removeItem(array: [], item: never) {
   let index = array.indexOf(item);
   if (index !== -1) {
     array.splice(index, 1);
@@ -40,15 +40,15 @@ function removeItem(array, item) {
   return array;
 }
 
-function lesserOrEquals(a, b) {
+export function lesserOrEquals(a: number, b: number) {
   return a < b || a === b;
 }
 
-function biggerOrEquals(a, b) {
+export function biggerOrEquals(a: number, b: number) {
   return a > b || a === b;
 }
 
-function sleep(ms) {
+export function sleep(ms: number) {
   return new Promise(
     resolve => setTimeout(resolve, ms)
   );

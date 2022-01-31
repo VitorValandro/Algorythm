@@ -11,13 +11,15 @@
 *   - Worst cases: O(n²)
 */
 
-class QuickSort {
-  static sort(array) {
+import { swap } from '../../utils/utils';
+
+export class QuickSort {
+  static sort(array: number[]) {
     // calls a recursive function
     return QuickSort.quick(array, 0, array.length - 1)
   }
 
-  static quick(array, left, right) {
+  static quick(array: number[], left: number, right: number) {
     // Recursive function to actually sort the array
 
     // this index will separate the array into subarrays
@@ -40,7 +42,7 @@ class QuickSort {
     return array; // return the sorted array
   }
 
-  static partition(array, left, right) {
+  static partition(array: number[], left: number, right: number) {
     // Function to help split the array and order subarrays
 
     // pivot = value in the middle of the list
