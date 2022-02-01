@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 * The queue datastructure.
 * Queues are arrays that follow the FIFO (First In First Out) rule.
@@ -14,14 +15,18 @@
 *     - Search:     O(n)
 */
 
-class Queue {
+export class Queue<T> {
+  private count: number;
+  private lowestCount: number;
+  private items: any;
+
   constructor() {
     this.count = 0;
     this.lowestCount = 0; // saves the index of first element
     this.items = {};
   }
 
-  enqueue(element) {
+  enqueue(element: T) {
     // adds element to the end of the queue
     this.items[this.count] = element;
     this.count++;

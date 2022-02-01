@@ -22,6 +22,7 @@
 */
 
 import { Graph, initializeStatus, Status } from "../../datastructures/Graph";
+import { Queue } from "../../datastructures/Queue";
 
 export function BreadthFirstIteration(graph: Graph, startVertex: (string | number), callback: (v: (number | string)) => any) {
   const vertices = graph.getVertices();
