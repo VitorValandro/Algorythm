@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 * The Breadth Fisrt Search (BFS) algorithm starts travelling from the first specified vertex
 * and then visits all its adjacent vertices, one layer at time.
@@ -20,7 +21,9 @@
 * Time complexity : O(V + E)
 */
 
-function BreadthFirstIteration(graph, startVertex, callback) {
+import { Graph, initializeStatus, Status } from "../../datastructures/Graph";
+
+export function BreadthFirstIteration(graph: Graph, startVertex: (string | number), callback: (v: (number | string)) => any) {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const status = initializeStatus(vertices);
@@ -33,7 +36,7 @@ function BreadthFirstIteration(graph, startVertex, callback) {
     const u = Q.dequeue();
     status[u] = Status.VISITED; // Set u as VISITED
     // Get all neighbors of u
-    const neighbors = adjList.get(u);
+    const neighbors = adjList.get(u) || [];
 
     for (let i = 0; i < neighbors.length; i++) {
       // Enqueue all neighbors w that are UNEXPLORED 
@@ -51,7 +54,7 @@ function BreadthFirstIteration(graph, startVertex, callback) {
       callback(u);
     }
   }
-};
+}
 
 /*
 * This is a improved version of Breadth First Search. While the algorithm BFIteration above just
@@ -59,14 +62,14 @@ function BreadthFirstIteration(graph, startVertex, callback) {
 * from the startVertex and track the predecessor for every node, so we can get the shortest path from
 * startVertex to all other nodes.
 */
-function BFS(graph, startVertex) {
+export function BFS(graph: Graph, startVertex: (string | number)) {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   const status = initializeStatus(vertices);
   const Q = new Queue(); // create the queue Q
 
-  const distances = {};
-  const predecessors = {};
+  const distances: any = {};
+  const predecessors: any = {};
 
   // Populate distances and predecessors with start values
   for (let i = 0; i < vertices.length; i++) {
@@ -81,7 +84,7 @@ function BFS(graph, startVertex) {
     const u = Q.dequeue();
     status[u] = Status.VISITED; // Set u as VISITED
     // Get all neighbors of u
-    const neighbors = adjList.get(u);
+    const neighbors = adjList.get(u) || [];
 
     for (let i = 0; i < neighbors.length; i++) {
       // Enqueue all neighbors w that are UNEXPLORED 
@@ -103,4 +106,4 @@ function BFS(graph, startVertex) {
     distances,
     predecessors
   }
-};
+}

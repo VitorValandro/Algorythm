@@ -1,12 +1,12 @@
-import { QuickSort } from './QuickSort';
-import { BucketSort } from './BucketSort';
-import { CountingSort } from './CountingSort';
-import { HeapSort } from './HeapSort';
+import { QuickSort } from '../algorithms/arrays/QuickSort';
+import { BucketSort } from '../algorithms/arrays/BucketSort';
+import { CountingSort } from '../algorithms/arrays/CountingSort';
+import { HeapSort } from '../algorithms/arrays/HeapSort';
 
-import { BinarySearch } from './BinarySearch';
-import { InterpolationSearch } from './InterpolationSearch';
+import { BinarySearch } from '../algorithms/arrays/BinarySearch';
+import { InterpolationSearch } from '../algorithms/arrays/InterpolationSearch';
 
-import { FisherYates } from './FisherYates';
+import { FisherYates } from '../algorithms/arrays/FisherYates';
 
 const ARRAY = [...Array(20)].map(() => { return Math.floor(Math.random() * 100) });
 const randomValue = ARRAY[Math.floor(Math.random() * (ARRAY.length - 1) + 1)];

@@ -92,7 +92,7 @@ export class Graph {
   }
 }
 
-enum Status {
+export enum Status {
   UNEXPLORED = 0,
   VISITED = 1,
   EXPLORED = 2
