@@ -1,4 +1,5 @@
 import { BFS, BreadthFirstIteration } from "../algorithms/graphs/BreadthFirstSearch";
+import { DFS, DFSIteration } from "../algorithms/graphs/DepthFirstSearch";
 import { Graph } from "../datastructures/Graph";
 
 const graph_vertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
@@ -49,5 +50,34 @@ describe("Testing the Graph data structure", () => {
     const testCallback = (v: (string | number)) => { vertices.push(v); }
     BreadthFirstIteration(graph, 'A', testCallback);
     expect(vertices).toEqual(graph_vertices);
+  })
+
+  test('Depth First Search (DFS)', () => {
+    const expected_return = {
+      discovery: { A: 1, B: 2, C: 10, D: 11, E: 3, F: 7, G: 12, H: 14, I: 4 },
+      finished: { A: 18, B: 9, C: 17, D: 16, E: 6, F: 8, G: 13, H: 15, I: 5 },
+      predecessors: {
+        A: null,
+        B: 'A',
+        C: 'A',
+        D: 'C',
+        E: 'B',
+        F: 'B',
+        G: 'D',
+        H: 'D',
+        I: 'E'
+      }
+    }
+    expect(DFS(graph)).toEqual(expected_return);
+  })
+
+
+  test('Depth First Search: Iterate over', () => {
+    const expected_vertices = ['A', 'B', 'E', 'I', 'F', 'C', 'D', 'G', 'H']
+    const vertices: (string | number)[] = [];
+
+    const testCallback = (v: (string | number)) => { vertices.push(v); }
+    DFSIteration(graph, testCallback);
+    expect(vertices).toEqual(expected_vertices);
   })
 })

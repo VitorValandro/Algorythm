@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 * The Depth First Search (DFS) algorithm travels the graph from the 0 index vertex and
 * follows the path of adjascent nodes until the last vertex be visited. 
@@ -15,17 +16,20 @@
 * E.g. -> const printVertex = (value) => console.log(value); -> will print all values of the graph
 */
 
-function DFSIteration(graph, callback) {
+import { Dictionary } from "../../datastructures/Dictionary";
+import { Graph, initializeStatus, Status } from "../../datastructures/Graph";
+
+export function DFSIteration(graph: Graph, callback: (v: (number | string)) => any) {
   const vertices = graph.getVertices();
   const adjList = graph.getAdjList();
   // start all vertices status as UNEXPLORED
-  const status = initializeStatus(vertices)
+  const status = initializeStatus(vertices);
 
   // Iterates over all vertices starting from the 0 index
   for (let i = 0; i < vertices.length; i++) {
     if (status[vertices[i]] === Status.UNEXPLORED) {
       // visit all UNEXPLORED vertices
-      DFSVisit(vertices[i], status, adjList, callback);
+      DFSIterationVisit(vertices[i], status, adjList, callback);
       /*
       * This recursive function DFSVisit creates a Stack.
       * When all adjascent nodes of i has been visited, we backtrack to this
@@ -33,9 +37,14 @@ function DFSIteration(graph, callback) {
       */
     }
   }
-};
+}
 
-function DFSIterationVisit(u, status, adjList, callback) {
+function DFSIterationVisit(
+  u: string | number,
+  status: any,
+  adjList: Dictionary<string | number, (string | number)[]>,
+  callback: (v: (number | string)) => any
+) {
   status[u] = Status.VISITED; // sets u as VISITED
 
   // calls the callback function over the u vertex
@@ -43,12 +52,12 @@ function DFSIterationVisit(u, status, adjList, callback) {
     callback(u);
   }
   // gets and iterates over all neighbors of u
-  const neighbors = adjList.get(u);
+  const neighbors = adjList.get(u) || [];
   for (let i = 0; i < neighbors.length; i++) {
     const w = neighbors[i];
     if (status[w] === Status.UNEXPLORED) {
       // Recursively visitS all UNEXPLORED neighbors
-      DFSVisit(w, status, adjList, callback);
+      DFSIterationVisit(w, status, adjList, callback);
     }
   }
   status[u] = Status.EXPLORED; // Sets u as EXPLORED
@@ -67,7 +76,7 @@ function DFSIterationVisit(u, status, adjList, callback) {
 * Time complexity : O(V + E)
 */
 
-function DFS(graph) {
+export function DFS(graph: Graph) {
   // 1 ≤ d[u] < f[u] ≤ 2|V|
 
   const vertices = graph.getVertices();
@@ -75,9 +84,9 @@ function DFS(graph) {
   // start all vertices status as UNEXPLORED
   const status = initializeStatus(vertices);
   // initialize some params to store information of graph
-  const d = {};
-  const f = {};
-  const p = {};
+  const d: any = {};
+  const f: any = {};
+  const p: any = {};
   const time = { count: 0 };
 
   // populate objects with start values
@@ -106,18 +115,26 @@ function DFS(graph) {
   }
 }
 
-function DFSVisit(u, status, d, f, p, time, adjList) {
+function DFSVisit(
+  u: string | number,
+  status: any,
+  d: any,
+  f: any,
+  p: any,
+  time: any,
+  adjList: any
+) {
   status[u] = Status.VISITED; // sets u as VISITED
 
   d[u] = ++time.count; // register the instant of visit
   // gets and iterates over all neighbors of u
-  const neighbors = adjList.get(u);
+  const neighbors = adjList.get(u) || [];
   for (let i = 0; i < neighbors.length; i++) {
     const w = neighbors[i];
     // Recursively visitS all UNEXPLORED neighbors
     if (status[w] === Status.UNEXPLORED) {
       p[w] = u; // register the predecessor
-      DFSVisit(w, color, d, f, p, time, adjList);
+      DFSVisit(w, status, d, f, p, time, adjList);
     }
   }
   status[u] = Status.EXPLORED; // Sets u as EXPLORED
