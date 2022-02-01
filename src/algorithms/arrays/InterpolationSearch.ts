@@ -2,9 +2,12 @@
 * Time complexity (in sorted Arrays): O(n)
 */
 
-class InterpolationSearch {
+import { biggerOrEquals, lesserOrEquals } from "../../utils/utils";
+import { QuickSort } from "./QuickSort";
+
+export class InterpolationSearch {
   // search for `value` in an `array`
-  static search(array, value) {
+  static search(array: number[], value: number) {
     const { length } = array;
     let low = 0; // start low pointer as first index
     let high = length - 1; // start high pointer as last index

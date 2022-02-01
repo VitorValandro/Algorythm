@@ -1,5 +1,5 @@
-class FisherYates {
-  static shuffle(array) {
+export class FisherYates {
+  static shuffle(array: number[]) {
     // an implementation of Fisher-Yates shuffle algorithm
     let currentIndex = array.length, randomIndex;
 

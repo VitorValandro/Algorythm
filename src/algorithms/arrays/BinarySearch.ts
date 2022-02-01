@@ -2,8 +2,11 @@
 * Time complexity (in sorted Arrays): O(log(n))
 */
 
-class BinarySearch {
-  static search(array, value) {
+import { lesserOrEquals } from "../../utils/utils";
+import { QuickSort } from "./QuickSort";
+
+export class BinarySearch {
+  static search(array: number[], value: number) {
     // first, sort the array with ascending values
     const sortedArray = QuickSort.sort(array);
 
