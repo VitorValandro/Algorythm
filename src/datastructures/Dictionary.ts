@@ -1,25 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 * A dictionary is a collection used to store pairs of keys and values.
 * Unlike Sets, Stacks or Queues, dictionaries are nonsequential.
 */
 
-class ValuePair {
-  constructor(key, value) {
-    this.key = key;
-    this.value = value;
-  }
+class ValuePair<K, V> {
+  constructor(public key: K, public value: V) { }
 
   toString() {
     return `[#${this.key}: ${this.value}]`;
   }
 }
 
-class Dictionary {
+export class Dictionary<K, V> {
+  private table: { [key: string]: ValuePair<K, V> };
+  toStr: (item: K) => string;
+
   constructor() {
     this.table = {};
     // the toStr() function is important because javascript objects just accepts
     // strings for keys, so we need to convert all keys to string.
-    this.toStr = (item) => {
+    this.toStr = (item: any) => {
       if (item === null) {
         "NULL";
       }
@@ -33,7 +34,7 @@ class Dictionary {
     }
   }
 
-  set(key, value) {
+  set(key: K, value: V) {
     // adds a new value to the dict. If key already exists, its value will be overwritted.
     if (key != null && value != null) {
       const tableKey = this.toStr(key);
@@ -43,7 +44,7 @@ class Dictionary {
     return false;
   }
 
-  remove(key) {
+  remove(key: K) {
     // removes a value from the dict
     if (this.hasKey(key)) {
       delete this.table[this.toStr(key)];
@@ -52,12 +53,12 @@ class Dictionary {
     return false;
   }
 
-  hasKey(key) {
+  hasKey(key: K) {
     // returns if a specific key is in the dict (boolean)
     return this.table[this.toStr(key)] != null;
   }
 
-  get(key) {
+  get(key: K) {
     // returns the value of the specified key from the dict
     const valuePair = this.table[this.toStr(key)];
     return valuePair == null ? undefined : valuePair.value;
@@ -90,18 +91,10 @@ class Dictionary {
 
   keyValues() {
     // returns an array with all pairs of [key, value] of the dict
-    const valuePairs = [];
-
-    for (const k in this.table) {
-      if (this.hasKey(k)) {
-        valuePairs.push(this.table[k]);
-      }
-    }
-
-    return valuePairs;
+    return Object.values(this.table);
   }
 
-  forEach(callbackFn) {
+  forEach(callbackFn: (key: K, value: V) => any) {
     // iterates over values of the dict. This method is breaked if the callback function returns false.
     const valuePairs = this.keyValues();
     for (let i = 0; i < valuePairs.length; i++) {

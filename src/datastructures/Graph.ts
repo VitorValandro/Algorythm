@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
 * A graph is a data structure that represents a network.
 * Graphs are a set of nodes (vertices) connected by edges.
@@ -24,12 +25,13 @@
 *     - Get (query): O(1)
 */
 
-class Graph {
-  constructor(isDirected = false) {
-    this.isDirected = isDirected;
-    this.vertices = []; //array to store the name of vertices
-    this.adjList = new Dictionary(); // adjascent list to map vertices and edges
-  }
+import { Dictionary } from "./Dictionary";
+
+export class Graph {
+  private vertices: (string | number)[] = [];
+  private adjList: Dictionary<string | number, (string | number)[]> = new Dictionary();
+
+  constructor(private isDirected = false) { }
 
   getVertices() {
     // getter method - returns the vertices array
@@ -41,19 +43,19 @@ class Graph {
     return this.adjList;
   }
 
-  addVertex(v) {
+  addVertex(v: string | number) {
     // inserts a new vertex into the graph
 
     // check if vertex doesn't exists
     if (!this.vertices.includes(v)) {
       // add it to vertice's array
-      this.vertices._push(v);
+      this.vertices.push(v);
       // add it to adjascent list
       this.adjList.set(v, []);
     }
   }
 
-  addEdge(v, w) {
+  addEdge(v: string | number, w: string | number) {
     // link two vertices (v, w) by creating an edge
 
     // check if vertex v exists, if not, create it
@@ -66,11 +68,11 @@ class Graph {
     }
 
     // link from v to w by adding w to v's ajdascent list
-    this.adjList.get(v)._push(w);
+    this.adjList.get(v)?.push(w);
 
     // if graph isn't directed, link from w to v too
-    if (!this.isDirected) {
-      this.adjList.get(w)._push(v);
+    if (this.isDirected !== true) {
+      this.adjList.get(w)?.push(v);
     }
   }
 
@@ -80,7 +82,7 @@ class Graph {
     let s = '';
     for (let i = 0; i < this.vertices.length; i++) {
       s += `${this.vertices[i]} -> `;
-      const neighbors = this.adjList.get(this.vertices[i]);
+      const neighbors = this.adjList.get(this.vertices[i]) || [];
       for (let j = 0; j < neighbors.length; j++) {
         s += `${neighbors[j]} `;
       }
@@ -90,14 +92,14 @@ class Graph {
   }
 }
 
-const Status = {
-  UNEXPLORED: 0,
-  VISITED: 1,
-  EXPLORED: 2
+enum Status {
+  UNEXPLORED = 0,
+  VISITED = 1,
+  EXPLORED = 2
 }
 
-const initializeStatus = vertices => {
-  const status = {};
+export const initializeStatus = (vertices: (string | number)[]) => {
+  const status: any = {};
   for (let i = 0; i < vertices.length; i++) {
     status[vertices[i]] = Status.UNEXPLORED;
   }
