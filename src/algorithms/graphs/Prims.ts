@@ -9,7 +9,7 @@
 * This implementation works in connected and undirected graphs represented by an adjacency matrix.
 */
 
-function Prim(graph) {
+export function Prim(graph: number[][]) {
   const parent = [];
   const key = [];
   const visited = [];
@@ -44,7 +44,7 @@ function Prim(graph) {
   return parent;
 }
 
-function minKey(graph, key, visited) {
+function minKey(graph: number[][], key: number[], visited: boolean[]) {
   // Initialize min value
   let min = Infinity;
   let minIndex = 0;
@@ -55,4 +55,4 @@ function minKey(graph, key, visited) {
     }
   }
   return minIndex;
-};
+}

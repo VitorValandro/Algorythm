@@ -6,7 +6,7 @@
 * vertex (src) to all other nodes of a graph represented by a adjacency matrix.
 */
 
-function Dijkstra(graph, src) {
+export function Dijkstra(graph: number[][], src: number) {
   const INF = Infinity;
 
   const dist = []; // array to store the distances
@@ -40,7 +40,7 @@ function Dijkstra(graph, src) {
   return dist;
 }
 
-function minDistance(dist, visited) {
+function minDistance(dist: number[], visited: boolean[]) {
   // returns the index of the min distance in dist array
   let min = Infinity;
   let minIndex = -1;

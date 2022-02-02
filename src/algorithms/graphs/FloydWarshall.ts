@@ -3,8 +3,8 @@
 * all other vertices in a graph represented by an adjacency matrix.
 */
 
-function floydWarshall(graph) {
-  const dist = [];
+export function floydWarshall(graph: number[][]) {
+  const dist: number[][] = [];
   const { length } = graph;
 
   // Populate the distance array
