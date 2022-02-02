@@ -1,5 +1,9 @@
 import { BFS, BreadthFirstIteration } from "../algorithms/graphs/BreadthFirstSearch";
 import { DFS, DFSIteration } from "../algorithms/graphs/DepthFirstSearch";
+import { Dijkstra } from "../algorithms/graphs/Dijkstra";
+import { floydWarshall } from "../algorithms/graphs/FloydWarshall";
+import { kruskal } from "../algorithms/graphs/Kruskal";
+import { Prim } from "../algorithms/graphs/Prims";
 import { Graph } from "../datastructures/Graph";
 
 const graph_vertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
@@ -71,7 +75,6 @@ describe("Testing the Graph data structure", () => {
     expect(DFS(graph)).toEqual(expected_return);
   })
 
-
   test('Depth First Search: Iterate over', () => {
     const expected_vertices = ['A', 'B', 'E', 'I', 'F', 'C', 'D', 'G', 'H']
     const vertices: (string | number)[] = [];
@@ -79,5 +82,68 @@ describe("Testing the Graph data structure", () => {
     const testCallback = (v: (string | number)) => { vertices.push(v); }
     DFSIteration(graph, testCallback);
     expect(vertices).toEqual(expected_vertices);
+  })
+
+  test('Dijkstra pathfinding', () => {
+    const adjacency_graph = [
+      [0, 2, 4, 0, 0, 0],
+      [0, 0, 1, 4, 2, 0],
+      [0, 0, 0, 0, 3, 0],
+      [0, 0, 0, 0, 0, 2],
+      [0, 0, 0, 3, 0, 2],
+      [0, 0, 0, 0, 0, 0]
+    ];
+
+    expect(Dijkstra(adjacency_graph, 0)).toEqual([0, 2, 3, 6, 4, 6]);
+  })
+
+  test('Floyd-Warshall shortest path', () => {
+    const expected_return = [
+      [0, 3, 7, 5],
+      [2, 0, 6, 4],
+      [3, 1, 0, 5],
+      [5, 3, 2, 0]
+    ];
+
+    const adjacency_graph = [
+      [0, 3, Infinity, 5],
+      [2, 0, Infinity, 4],
+      [Infinity, 1, 0, Infinity],
+      [Infinity, Infinity, 2, 0]
+    ];
+
+    expect(floydWarshall(adjacency_graph)).toEqual(expected_return);
+  });
+
+  test("Kruskal's MST algorithm", () => {
+    const expected_return = {
+      path: { '0,1': 2, '1,2': 3, '1,4': 5, '0,3': 6 },
+      minCost: 16
+    }
+
+    const adjacency_graph = [
+      [Infinity, 2, Infinity, 6, Infinity],
+      [2, Infinity, 3, 8, 5],
+      [Infinity, 3, Infinity, Infinity, 7],
+      [6, 8, Infinity, Infinity, 9],
+      [Infinity, 5, 7, 9, Infinity]
+    ];
+
+    expect(kruskal(adjacency_graph)).toEqual(expected_return);
+  });
+
+  test("Prim's MST algorithm", () => {
+    const expected_return = [-1, 0, 1, 5, 1, 4];
+
+    const adjacency_graph = [
+      [0, 2, 4, 0, 0, 0],
+      [2, 0, 2, 4, 2, 0],
+      [4, 2, 0, 0, 3, 0],
+      [0, 4, 0, 0, 3, 2],
+      [0, 2, 3, 3, 0, 2],
+      [0, 0, 0, 2, 2, 0]
+    ];
+
+    expect(Prim(adjacency_graph)).toEqual(expected_return);
   })
 })
